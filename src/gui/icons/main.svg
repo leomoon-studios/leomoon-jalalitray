@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="150"
+   height="150"
+   viewBox="0 0 39.6875 39.6875"
+   version="1.1"
+   id="svg8"
+   inkscape:version="0.92.4 (5da689c313, 2019-01-14)"
+   sodipodi:docname="main.svg"
+   inkscape:export-filename="D:\Docs\Projects\python3_projects\jalalitray\src\gui\icons\main.png"
+   inkscape:export-xdpi="163.84"
+   inkscape:export-ydpi="163.84">
+  <defs
+     id="defs2" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="5.6002857"
+     inkscape:cx="115.30575"
+     inkscape:cy="87.15263"
+     inkscape:document-units="mm"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     units="px"
+     inkscape:pagecheckerboard="true"
+     showguides="true"
+     inkscape:guide-bbox="true"
+     inkscape:window-width="2560"
+     inkscape:window-height="1387"
+     inkscape:window-x="-8"
+     inkscape:window-y="1432"
+     inkscape:window-maximized="1">
+    <sodipodi:guide
+       position="19.84375,49.843224"
+       orientation="1,0"
+       id="guide4542"
+       inkscape:locked="false" />
+    <sodipodi:guide
+       position="42.000461,19.842738"
+       orientation="0,1"
+       id="guide4544"
+       inkscape:locked="false" />
+  </sodipodi:namedview>
+  <metadata
+     id="metadata5">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:groupmode="layer"
+     id="layer6"
+     inkscape:label="backup"
+     style="display:none">
+    <rect
+       style="display:inline;fill:#eef0ef;fill-opacity:1;stroke:none;stroke-width:0.17863104;stroke-opacity:1"
+       id="rect6861-2"
+       width="59.998947"
+       height="0.69999999"
+       x="-10.170095"
+       y="17.5075"
+       ry="0.35006624" />
+    <rect
+       id="rect20-4"
+       width="39.688"
+       height="39.6875"
+       x="0"
+       y="-39.6875"
+       ry="6.3205934"
+       style="display:inline;fill:#cdcdcd;fill-opacity:1;stroke:none;stroke-width:0.26458502;stroke-opacity:1"
+       transform="scale(1,-1)"
+       inkscape:export-filename="D:\Docs\Projects\python3_projects\jalalitray\src\gui\icons\logo.png"
+       inkscape:export-xdpi="163.84"
+       inkscape:export-ydpi="163.84" />
+  </g>
+  <g
+     inkscape:label="bg"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(0,-257.3125)"
+     style="display:inline">
+    <path
+       style="fill:#888888;fill-opacity:1;stroke:none;stroke-width:1.0000062;stroke-opacity:1"
+       d="M 150.00195 68.816406 L 0 68.816406 L 0 126.11133 C 0 139.34575 10.654245 150 23.888672 150 L 126.11328 150 C 139.34771 150 150.00195 139.34575 150.00195 126.11133 L 150.00195 68.816406 z "
+       id="path7157"
+       transform="matrix(0.26458333,0,0,0.26458333,0,257.3125)" />
+    <path
+       style="fill:#cdcdcd;fill-opacity:1;stroke:none;stroke-width:1.0000062;stroke-opacity:1"
+       d="M 23.888672 0 C 10.654245 0 -2.3684758e-15 10.654245 0 23.888672 L 0 66.169922 L 150.00195 66.169922 L 150.00195 23.888672 C 150.00195 10.654245 139.34771 0 126.11328 0 L 23.888672 0 z "
+       id="rect20"
+       transform="matrix(0.26458333,0,0,0.26458333,0,257.3125)" />
+    <flowRoot
+       xml:space="preserve"
+       id="flowRoot4530"
+       style="font-style:normal;font-weight:normal;font-size:40px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none"
+       transform="matrix(0.26458333,0,0,0.26458333,0,257.3125)"><flowRegion
+         id="flowRegion4532"><rect
+           id="rect4534"
+           width="150"
+           height="150"
+           x="0"
+           y="-1.1368684e-13" /></flowRegion><flowPara
+         id="flowPara4536" /></flowRoot>  </g>
+  <g
+     style="display:inline"
+     transform="translate(0,-257.3125)"
+     id="g6299"
+     inkscape:groupmode="layer"
+     inkscape:label="bg copy">
+    <path
+       style="display:inline;fill:#e4e4e4;fill-opacity:1;stroke:none;stroke-width:0.97449011;stroke-opacity:1"
+       d="M 150.00195,68.816406 H 0 v 50.939454 c 0,12.56766 10.117885,22.68555 22.685547,22.68555 H 127.31641 c 12.56766,0 22.68554,-10.11789 22.68554,-22.68555 z"
+       id="path7087"
+       transform="matrix(0.26458333,0,0,0.26458333,0,257.3125)"
+       inkscape:export-filename="D:\Docs\Projects\python3_projects\jalalitray\src\gui\icons\logo.png"
+       inkscape:export-xdpi="163.84"
+       inkscape:export-ydpi="163.84"
+       inkscape:connector-curvature="0" />
+    <path
+       style="display:inline;fill:#eef0ef;fill-opacity:1;stroke:none;stroke-width:0.97449011;stroke-opacity:1"
+       d="M 22.685547,-0.00195313 C 10.117885,-0.00195313 0,10.115932 0,22.683594 V 66.169922 H 150.00195 V 22.683594 c 0,-12.567662 -10.11788,-22.68554713 -22.68554,-22.68554713 z"
+       id="rect20-8"
+       transform="matrix(0.26458333,0,0,0.26458333,0,257.3125)"
+       inkscape:export-filename="D:\Docs\Projects\python3_projects\jalalitray\src\gui\icons\logo.png"
+       inkscape:export-xdpi="163.84"
+       inkscape:export-ydpi="163.84"
+       inkscape:connector-curvature="0" />
+    <rect
+       style="fill:#eef0ef;fill-opacity:0;stroke:none;stroke-width:0.25783381;stroke-opacity:1"
+       ry="2.5125334"
+       y="257.31201"
+       x="0"
+       height="37.688"
+       width="39.688"
+       id="rect6289"
+       inkscape:export-filename="D:\Docs\Projects\python3_projects\jalalitray\src\gui\icons\logo.png"
+       inkscape:export-xdpi="163.84"
+       inkscape:export-ydpi="163.84" />
+    <flowRoot
+       transform="matrix(0.26458333,0,0,0.26458333,0,257.3125)"
+       style="font-style:normal;font-weight:normal;font-size:40px;line-height:1.25;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none"
+       id="flowRoot6297"
+       xml:space="preserve"><flowRegion
+         id="flowRegion6293"><rect
+           y="-1.1368684e-13"
+           x="0"
+           height="150"
+           width="150"
+           id="rect6291" /></flowRegion><flowPara
+         id="flowPara6295" /></flowRoot>    <path
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:31.75px;line-height:1.25;font-family:Vazir;-inkscape-font-specification:Vazir;text-align:center;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#797979;fill-opacity:1;stroke:none;stroke-width:0.99999994"
+       d="M 43.353516,68.816406 H 32.902344 c 0.81696,7.206591 1.378906,14.757116 1.378906,23.064453 V 107.70117 H 44.769531 V 92.056641 c 0,-4.983082 -0.550246,-13.189849 -1.416015,-23.240235 z"
+       id="path7052"
+       transform="matrix(0.26458333,0,0,0.26458333,0,257.3125)"
+       inkscape:export-filename="D:\Docs\Projects\python3_projects\jalalitray\src\gui\icons\logo.png"
+       inkscape:export-xdpi="163.84"
+       inkscape:export-ydpi="163.84"
+       inkscape:connector-curvature="0" />
+    <path
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:31.75px;line-height:1.25;font-family:Vazir;-inkscape-font-specification:Vazir;text-align:center;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#a7a7a7;fill-opacity:1;stroke:none;stroke-width:0.99999994"
+       d="m 91.820312,27.779297 -10.371093,1.171875 0.292969,2.226562 c 1.210948,8.984391 1.11328,14.999997 -0.292969,18.046875 -1.289064,2.734363 -3.417968,4.082024 -6.386719,4.042969 -4.960937,-0.03905 -7.636719,-5.332034 -8.027344,-15.878906 l -0.234375,-6.152344 -9.257812,0.761719 -0.05859,5.800781 c 0,10.07811 -2.539062,15.097649 -7.617187,15.058594 -5.507813,-0.03905 -9.062501,-2.265603 -10.664063,-6.679688 l -6.445313,-17.8125 -9.609374,3.398438 c 4.651945,9.426313 7.672043,21.0513 9.408203,34.40625 h 10.576171 c -0.139354,-1.550788 -0.19727,-2.627984 -0.355468,-4.289063 1.757813,1.445317 4.355468,2.167969 7.792968,2.167969 3.867188,0 7.617189,-2.226547 11.25,-6.679687 l 0.117188,-0.175782 0.175781,0.175782 c 3.789062,4.37503 8.027343,6.582038 12.714844,6.621093 8.554686,0.07811 14.121092,-4.316419 16.699219,-13.183593 1.171873,-3.984378 1.367186,-10.566403 0.585937,-19.746094 z"
+       id="path6993"
+       transform="matrix(0.26458333,0,0,0.26458333,0,257.3125)"
+       inkscape:export-filename="D:\Docs\Projects\python3_projects\jalalitray\src\gui\icons\logo.png"
+       inkscape:export-xdpi="163.84"
+       inkscape:export-ydpi="163.84"
+       inkscape:connector-curvature="0" />
+    <path
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:31.75px;line-height:1.25;font-family:Vazir;-inkscape-font-specification:Vazir;text-align:center;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#797979;fill-opacity:1;stroke:none;stroke-width:0.99999994"
+       d="m 125.35156,68.816406 h -10.41797 c 0.81696,7.206591 1.37891,14.757116 1.37891,23.064453 v 15.820311 h 10.48828 V 92.056641 c 0,-8.19952 -0.58932,-15.84581 -1.44922,-23.240235 z"
+       id="path7047"
+       transform="matrix(0.26458333,0,0,0.26458333,0,257.3125)"
+       inkscape:export-filename="D:\Docs\Projects\python3_projects\jalalitray\src\gui\icons\logo.png"
+       inkscape:export-xdpi="163.84"
+       inkscape:export-ydpi="163.84"
+       inkscape:connector-curvature="0" />
+    <path
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:31.75px;line-height:1.25;font-family:Vazir;-inkscape-font-specification:Vazir;text-align:center;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#a7a7a7;fill-opacity:1;stroke:none;stroke-width:0.99999994"
+       d="m 114.84766,28.365234 -9.66797,3.398438 c 4.65194,9.426313 7.67204,21.0513 9.4082,34.40625 h 10.40625 C 123.14017,52.137949 119.88151,39.419978 114.84766,28.365234 Z"
+       id="path6995"
+       transform="matrix(0.26458333,0,0,0.26458333,0,257.3125)"
+       inkscape:export-filename="D:\Docs\Projects\python3_projects\jalalitray\src\gui\icons\logo.png"
+       inkscape:export-xdpi="163.84"
+       inkscape:export-ydpi="163.84"
+       inkscape:connector-curvature="0" />
+    <rect
+       style="fill:#444444;fill-opacity:1;stroke:none;stroke-width:0.3146618;stroke-opacity:1"
+       id="rect7089"
+       width="1.3229166"
+       height="3.6760001"
+       x="35.983334"
+       y="273.48126"
+       ry="0.46772575"
+       inkscape:export-filename="D:\Docs\Projects\python3_projects\jalalitray\src\gui\icons\logo.png"
+       inkscape:export-xdpi="163.84"
+       inkscape:export-ydpi="163.84" />
+    <rect
+       style="display:inline;fill:#444444;fill-opacity:1;stroke:none;stroke-width:0.31465241;stroke-opacity:1"
+       id="rect7089-5"
+       width="1.3229166"
+       height="3.6757805"
+       x="2.3812499"
+       y="273.34781"
+       ry="0.4676978"
+       inkscape:export-filename="D:\Docs\Projects\python3_projects\jalalitray\src\gui\icons\logo.png"
+       inkscape:export-xdpi="163.84"
+       inkscape:export-ydpi="163.84" />
+  </g>
+</svg>
