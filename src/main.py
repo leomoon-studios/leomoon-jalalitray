@@ -49,8 +49,8 @@ class SystemTrayIcon(QtWidgets.QSystemTrayIcon):
         titleAction = menu.addAction(title+' '+ver)
         titleAction.setEnabled(False)
         menu.addSeparator()
-        self.dayOfWeek = menu.addAction('')
-        self.dayOfWeek.setEnabled(False)
+        self.dayOfWeekAction = menu.addAction('')
+        self.dayOfWeekAction.setEnabled(False)
         self.jalaliAction = menu.addAction('Jalali: ')
         self.jalaliAction.setEnabled(False)
         self.miladiAction = menu.addAction('Miladi: ')
@@ -126,6 +126,19 @@ class SystemTrayIcon(QtWidgets.QSystemTrayIcon):
         self.hide() #hide tray before exiting
         QtCore.QCoreApplication.exit()
 
+    def dow(self):
+        var = datetime.today().strftime("%A")
+        if var == 'Monday': var = jDays[0]
+        if var == 'Tuesday': var = jDays[1]
+        if var == 'Wednesday': var = jDays[2]
+        if var == 'Thursday': var = jDays[3]
+        if var == 'Friday': var = jDays[4]
+        if var == 'Saturday': var = jDays[5]
+        if var == 'Sunday': var = jDays[6]
+        return var
+        # oJalaliFormatted = dow+'، '+oJalaliList[2]+' '+jMonths[int(oJalaliList[1])-1]+'، '+oJalaliList[0]+self.kabise(oJalaliList[0])
+        # self.ui.m2jLbl.setText(oJalaliFormatted)
+
     def check(self):
         """check and see if date has changed"""
         self.cDate = jalali.Gregorian(datetime.now().date()).persian_string()
@@ -135,9 +148,9 @@ class SystemTrayIcon(QtWidgets.QSystemTrayIcon):
                 clean[1] = '0'+clean[1]
             if len(clean[2]) == 1:
                 clean[2] = '0'+clean[2]
-            self.setToolTip(title+' '+ver+"\n"+datetime.today().strftime("%A")+"\n"+'Jalali: '+clean[0]+'-'+clean[1]+'-'+clean[2]+'\n'+'Miladi: '+str(datetime.now().date()))
+            self.setToolTip(title+' '+ver+"\n\n"+datetime.today().strftime("%A")+' | '+self.dow()+"\n"+'Jalali: '+clean[0]+'-'+clean[1]+'-'+clean[2]+'\n'+'Miladi: '+str(datetime.now().date()))
             self.trayChange(clean[2])
-            self.dayOfWeek.setText(datetime.today().strftime("%A"))
+            self.dayOfWeekAction.setText(datetime.today().strftime("%A")+' | '+self.dow())
             self.jalaliAction.setText('Jalali: '+clean[0]+'-'+clean[1]+'-'+clean[2])
             self.miladiAction.setText('Miladi: '+str(datetime.now().date()))
             self.pDate = self.cDate
