@@ -1,5 +1,7 @@
-#custom
+# custom
 .vscode/
+.history/
+_gsdata_/
 
 # ---> Python
 # Byte-compiled / optimized / DLL files
