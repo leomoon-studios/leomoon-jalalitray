@@ -1,0 +1,10 @@
+[Desktop Entry]
+Version=1.0
+Name=LeoMoon JalaliTray
+Comment=LeoMoon JalaliTray
+Exec="/opt/leomoon-jalalitray/LeoMoon JalaliTray"
+Terminal=false
+Icon=/opt/leomoon-jalalitray/main.png
+Type=Application
+Categories=Utility;
+Name[en_CA]=LeoMoon JalaliTray
