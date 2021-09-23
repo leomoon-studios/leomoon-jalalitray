@@ -39,6 +39,7 @@ mMonths = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'Augu
 
 class SystemTrayIcon(QtWidgets.QSystemTrayIcon):
     def __init__(self, icon, parent=None):
+        self.themeFlg = False
         self.sleep = 1 #sleep amount for timer
         self.pDate = "0000-00-00"
         self.cDate = jalali.Gregorian(datetime.now().date()).persian_string()
@@ -64,8 +65,22 @@ class SystemTrayIcon(QtWidgets.QSystemTrayIcon):
             self.startupMenu.triggered.connect(self.startup)
             self.startupMenu.setCheckable(True)
             try:
-                value, regtype = winreg.QueryValueEx(winreg.OpenKey(winreg.HKEY_CURRENT_USER, r'SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run', 0, winreg.KEY_READ), 'LeoMoon JalaliTray')
+                #try query startup key. if exists then startup is true
+                value, regtype = winreg.QueryValueEx(winreg.OpenKey(winreg.HKEY_CURRENT_USER, r'SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run', 0, winreg.KEY_READ), 'LeoMoon JalaliTrays')
                 self.startupMenu.setChecked(True)
+            except Exception as e:
+                pass
+        ###############################################################################
+        ####### Theme startup #########################################################
+        ###############################################################################
+        if not sys.platform.startswith('darwin'): #not macos
+            self.themeAction = menu.addAction("Dark Mode")
+            self.themeAction.triggered.connect(self._theme)
+            self.themeAction.setCheckable(True)
+            try:
+                #check for dark theme: dark theme = value 0
+                value, regtype = winreg.QueryValueEx(winreg.OpenKey(winreg.HKEY_CURRENT_USER, r'SOFTWARE\\Microsoft\Windows\\CurrentVersion\\Themes\\Personalize', 0, winreg.KEY_READ), 'AppsUseLightTheme')
+                if value == 0: self._theme()
             except Exception as e:
                 pass
         websiteAction = menu.addAction("Visit LeoMoon Studios website")
@@ -101,7 +116,6 @@ class SystemTrayIcon(QtWidgets.QSystemTrayIcon):
         if sys.platform.startswith('win'):
             valexists = False
             try:
-                #if startup, remove it
                 winreg.QueryValueEx(winreg.OpenKey(winreg.HKEY_CURRENT_USER, r'SOFTWARE\\Microsoft\Windows\\CurrentVersion\\Run', 0, winreg.KEY_READ), 'LeoMoon JalaliTray')
                 valexists = True
             except:
@@ -118,6 +132,61 @@ class SystemTrayIcon(QtWidgets.QSystemTrayIcon):
         if self.mainUi.windowState() == QtCore.Qt.WindowMinimized:
             self.mainUi.setWindowState(QtCore.Qt.WindowNoState)
         self.mainUi.activateWindow()
+
+    def _theme(self):
+        if not self.themeFlg:
+            dark_theme = QtGui.QPalette()
+            dark_theme.setColor(QtGui.QPalette.Window, QtGui.QColor(55,53,53))
+            dark_theme.setColor(QtGui.QPalette.WindowText, QtGui.QColor(227,227,227))
+            dark_theme.setColor(QtGui.QPalette.Base, QtGui.QColor(30,30,30))
+            dark_theme.setColor(QtGui.QPalette.AlternateBase, QtGui.QColor(55,55,55))
+            dark_theme.setColor(QtGui.QPalette.ToolTipBase, QtGui.QColor(50,50,50))
+            dark_theme.setColor(QtGui.QPalette.ToolTipText, QtGui.QColor(227,227,227))
+            dark_theme.setColor(QtGui.QPalette.Text, QtGui.QColor(227,227,227))
+            dark_theme.setColor(QtGui.QPalette.Link, QtGui.QColor(227,227,227))
+            dark_theme.setColor(QtGui.QPalette.Button, QtGui.QColor(50,50,50))
+            dark_theme.setColor(QtGui.QPalette.ButtonText, QtGui.QColor(227,227,227))
+            dark_theme.setColor(QtGui.QPalette.BrightText, QtGui.QColor(227,227,227))
+            dark_theme.setColor(QtGui.QPalette.Active, QtGui.QPalette.Button, QtGui.QColor(53, 53, 53))
+            dark_theme.setColor(QtGui.QPalette.Inactive, QtGui.QPalette.Button, QtGui.QColor(53, 53, 53))
+            dark_theme.setColor(QtGui.QPalette.Disabled, QtGui.QPalette.ButtonText, QtCore.Qt.darkGray)
+            dark_theme.setColor(QtGui.QPalette.Disabled, QtGui.QPalette.WindowText, QtCore.Qt.darkGray)
+            dark_theme.setColor(QtGui.QPalette.Disabled, QtGui.QPalette.Text, QtCore.Qt.darkGray)
+            dark_theme.setColor(QtGui.QPalette.Disabled, QtGui.QPalette.Light, QtGui.QColor(53, 53, 53))
+            QtGui.QGuiApplication.setPalette(dark_theme)
+            self.mainUi.setStyleSheet("""
+                                        QFrame#banner {background-color: qlineargradient(x1:0 y1:0, x2:0 y2:1, stop:0 #5e5b5b, stop:1 #373535); border-radius: 0px;}
+                                        QLabel#titleLbl {color: rgb(227,227,227);}
+                                        QLabel#verLbl {color: rgb(227,227,227);}
+                                        """)
+            self.themeAction.setChecked(True)
+        else:
+            light_theme = QtGui.QPalette()
+            light_theme.setColor(QtGui.QPalette.Window, QtGui.QColor(240,240,240))
+            light_theme.setColor(QtGui.QPalette.WindowText, QtGui.QColor(68,68,68))
+            light_theme.setColor(QtGui.QPalette.Base, QtGui.QColor(255,255,255))
+            light_theme.setColor(QtGui.QPalette.AlternateBase, QtGui.QColor(255,255,255))
+            light_theme.setColor(QtGui.QPalette.ToolTipBase, QtGui.QColor(240,240,240))
+            light_theme.setColor(QtGui.QPalette.ToolTipText, QtGui.QColor(68,68,68))
+            light_theme.setColor(QtGui.QPalette.Text, QtGui.QColor(68,68,68))
+            light_theme.setColor(QtGui.QPalette.Link, QtGui.QColor(68,68,68))
+            light_theme.setColor(QtGui.QPalette.Button, QtGui.QColor(240,240,240))
+            light_theme.setColor(QtGui.QPalette.ButtonText, QtGui.QColor(68,68,68))
+            light_theme.setColor(QtGui.QPalette.BrightText, QtGui.QColor(68,68,68))
+            light_theme.setColor(QtGui.QPalette.Active, QtGui.QPalette.Button, QtGui.QColor(240,240,240))
+            light_theme.setColor(QtGui.QPalette.Inactive, QtGui.QPalette.Button, QtGui.QColor(240,240,240))
+            light_theme.setColor(QtGui.QPalette.Disabled, QtGui.QPalette.ButtonText, QtGui.QColor(128,128,128))
+            light_theme.setColor(QtGui.QPalette.Disabled, QtGui.QPalette.WindowText, QtGui.QColor(128,128,128))
+            light_theme.setColor(QtGui.QPalette.Disabled, QtGui.QPalette.Text, QtGui.QColor(128,128,128))
+            light_theme.setColor(QtGui.QPalette.Disabled, QtGui.QPalette.Light, QtGui.QColor(243,243,243))
+            QtGui.QGuiApplication.setPalette(light_theme)
+            self.mainUi.setStyleSheet("""
+                                        QFrame#banner {background-color: qlineargradient(x1:0 y1:0, x2:0 y2:1, stop:0 #c9c9c9, stop:1 #F0F0F0); border-radius: 0px;}
+                                        QLabel#titleLbl {color: rgb(68,68,68);}
+                                        QLabel#verLbl {color: rgb(68,68,68);}
+                                        """)
+            self.themeAction.setChecked(False)
+        self.themeFlg = not self.themeFlg
 
     def website(self):
         webbrowser.open('http://leomoon.com/', new=2)
@@ -186,6 +255,7 @@ class mainUi(QtWidgets.QMainWindow):  #QDialog will only have close button and s
         self.setFixedSize(self.width(), self.height())
         self.setWindowFlags(QtCore.Qt.Window | QtCore.Qt.MSWindowsFixedSizeDialogHint | QtCore.Qt.WindowMinimizeButtonHint | QtCore.Qt.WindowCloseButtonHint)
         #self.setWindowFlags(QtCore.Qt.Tool) #no taskbar button
+        self.default_palette = QtGui.QGuiApplication.palette()
         #change text
         self.setWindowTitle(title+' '+ver)
         self.ui.titleLbl.setText(titlef)
@@ -194,7 +264,7 @@ class mainUi(QtWidgets.QMainWindow):  #QDialog will only have close button and s
         self.ui.verLbl.setAlignment(QtCore.Qt.AlignLeft | QtCore.Qt.AlignVCenter)
         self.ui.copyLbl.setOpenExternalLinks(True)
         self.ui.copyLbl.setTextInteractionFlags(QtCore.Qt.LinksAccessibleByMouse)
-        self.ui.copyLbl.setText('<a style="text-decoration:none; color: inherit;" href="http://leomoon.com">© LeoMoon Studios</a>')
+        self.ui.copyLbl.setText('© LeoMoon Studios')
         #set fonts
         self.ui.titleLbl.setFont(QtGui.QFont('Vazir', 15, QtGui.QFont.Black))
         self.ui.verLbl.setFont(QtGui.QFont('Vazir FD', 10))
@@ -323,6 +393,8 @@ class mainUi(QtWidgets.QMainWindow):  #QDialog will only have close button and s
 
 def main():
     app = QtWidgets.QApplication(sys.argv)
+    if not sys.platform.startswith('darwin'): #not macos
+        app.setStyle('Fusion')
     QtGui.QFontDatabase.addApplicationFont(':/res/fonts/Vazir.ttf') #add custom font no install
     QtGui.QFontDatabase.addApplicationFont(':/res/fonts/Vazir-Black.ttf') #add custom font no install
     QtGui.QFontDatabase.addApplicationFont(':/res/fonts/Vazir-Bold.ttf') #add custom font no install
