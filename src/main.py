@@ -9,6 +9,7 @@ from PyQt5 import QtWidgets, QtCore, QtGui
 import resources_rc
 import ext.jalali as jalali #https://github.com/mjnaderi/Jalali.py 20140725
 from gui.guiMain import Ui_main
+from ext.darkdetect import isDark #darkdetect 0.5.0 [ https://github.com/albertosottile/darkdetect ] 20210912
 if sys.platform.startswith('win'):
     import winreg #startup reg
 
@@ -73,16 +74,12 @@ class SystemTrayIcon(QtWidgets.QSystemTrayIcon):
         ###############################################################################
         ####### Theme startup #########################################################
         ###############################################################################
-        if not sys.platform.startswith('darwin'): #not macos
-            self.themeAction = menu.addAction("Dark Mode")
-            self.themeAction.triggered.connect(self._theme)
-            self.themeAction.setCheckable(True)
-            try:
-                #check for dark theme: dark theme = value 0
-                value, regtype = winreg.QueryValueEx(winreg.OpenKey(winreg.HKEY_CURRENT_USER, r'SOFTWARE\\Microsoft\Windows\\CurrentVersion\\Themes\\Personalize', 0, winreg.KEY_READ), 'AppsUseLightTheme')
-                if value == 0: self._theme()
-            except Exception as e:
-                pass
+        self.themeAction = menu.addAction("Dark Mode")
+        self.themeAction.triggered.connect(self._theme)
+        self.themeAction.setCheckable(True)
+        if isDark():
+            self.themeFlg = False
+            self._theme()
         websiteAction = menu.addAction("Visit LeoMoon Studios website")
         websiteAction.triggered.connect(self.website)
         exitAction = menu.addAction("Exit")
@@ -393,8 +390,7 @@ class mainUi(QtWidgets.QMainWindow):  #QDialog will only have close button and s
 
 def main():
     app = QtWidgets.QApplication(sys.argv)
-    if not sys.platform.startswith('darwin'): #not macos
-        app.setStyle('Fusion')
+    app.setStyle('Fusion')
     QtGui.QFontDatabase.addApplicationFont(':/res/fonts/Vazir.ttf') #add custom font no install
     QtGui.QFontDatabase.addApplicationFont(':/res/fonts/Vazir-Black.ttf') #add custom font no install
     QtGui.QFontDatabase.addApplicationFont(':/res/fonts/Vazir-Bold.ttf') #add custom font no install
