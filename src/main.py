@@ -1,6 +1,6 @@
 #-*- coding: utf-8 -*-
 
-import os #open notepad test
+# import os #open notepad test
 import sys
 from datetime import datetime
 import calendar
@@ -259,8 +259,8 @@ class mainUi(QtWidgets.QMainWindow):  #QDialog will only have close button and s
         self.ui.titleLbl.setAlignment(QtCore.Qt.AlignLeft | QtCore.Qt.AlignVCenter)
         self.ui.verLbl.setText('نسخه '+ver)
         self.ui.verLbl.setAlignment(QtCore.Qt.AlignLeft | QtCore.Qt.AlignVCenter)
-        self.ui.copyLbl.setOpenExternalLinks(True)
-        self.ui.copyLbl.setTextInteractionFlags(QtCore.Qt.LinksAccessibleByMouse)
+        # self.ui.copyLbl.setOpenExternalLinks(True)
+        # self.ui.copyLbl.setTextInteractionFlags(QtCore.Qt.LinksAccessibleByMouse)
         self.ui.copyLbl.setText('© LeoMoon Studios')
         #set fonts
         self.ui.titleLbl.setFont(QtGui.QFont('Vazir', 15, QtGui.QFont.Black))
