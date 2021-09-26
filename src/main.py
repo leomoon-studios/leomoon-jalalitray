@@ -148,9 +148,9 @@ class SystemTrayIcon(QtWidgets.QSystemTrayIcon):
             dark_theme.setColor(QtGui.QPalette.HighlightedText, QtCore.Qt.black)
             dark_theme.setColor(QtGui.QPalette.Active, QtGui.QPalette.Button, QtGui.QColor(53, 53, 53))
             dark_theme.setColor(QtGui.QPalette.Inactive, QtGui.QPalette.Button, QtGui.QColor(53, 53, 53))
-            dark_theme.setColor(QtGui.QPalette.Disabled, QtGui.QPalette.ButtonText, QtCore.Qt.darkGray)
-            dark_theme.setColor(QtGui.QPalette.Disabled, QtGui.QPalette.WindowText, QtCore.Qt.darkGray)
-            dark_theme.setColor(QtGui.QPalette.Disabled, QtGui.QPalette.Text, QtCore.Qt.darkGray)
+            dark_theme.setColor(QtGui.QPalette.Disabled, QtGui.QPalette.ButtonText, QtGui.QColor(85,83,83))
+            dark_theme.setColor(QtGui.QPalette.Disabled, QtGui.QPalette.WindowText, QtGui.QColor(85,83,83))
+            dark_theme.setColor(QtGui.QPalette.Disabled, QtGui.QPalette.Text, QtGui.QColor(85,83,83))
             dark_theme.setColor(QtGui.QPalette.Disabled, QtGui.QPalette.Light, QtGui.QColor(53, 53, 53))
             QtGui.QGuiApplication.setPalette(dark_theme)
             self.mainUi.setStyleSheet("""
@@ -173,12 +173,12 @@ class SystemTrayIcon(QtWidgets.QSystemTrayIcon):
             light_theme.setColor(QtGui.QPalette.ButtonText, QtGui.QColor(68,68,68))
             light_theme.setColor(QtGui.QPalette.BrightText, QtGui.QColor(68,68,68))
             light_theme.setColor(QtGui.QPalette.Highlight, QtGui.QColor(18,131,220))
-            light_theme.setColor(QtGui.QPalette.HighlightedText, QtCore.Qt.black)
+            light_theme.setColor(QtGui.QPalette.HighlightedText, QtCore.Qt.white)
             light_theme.setColor(QtGui.QPalette.Active, QtGui.QPalette.Button, QtGui.QColor(240,240,240))
             light_theme.setColor(QtGui.QPalette.Inactive, QtGui.QPalette.Button, QtGui.QColor(240,240,240))
-            light_theme.setColor(QtGui.QPalette.Disabled, QtGui.QPalette.ButtonText, QtGui.QColor(128,128,128))
-            light_theme.setColor(QtGui.QPalette.Disabled, QtGui.QPalette.WindowText, QtGui.QColor(128,128,128))
-            light_theme.setColor(QtGui.QPalette.Disabled, QtGui.QPalette.Text, QtGui.QColor(128,128,128))
+            light_theme.setColor(QtGui.QPalette.Disabled, QtGui.QPalette.ButtonText, QtGui.QColor(118,118,118))
+            light_theme.setColor(QtGui.QPalette.Disabled, QtGui.QPalette.WindowText, QtGui.QColor(118,118,118))
+            light_theme.setColor(QtGui.QPalette.Disabled, QtGui.QPalette.Text, QtGui.QColor(118,118,118))
             light_theme.setColor(QtGui.QPalette.Disabled, QtGui.QPalette.Light, QtGui.QColor(243,243,243))
             QtGui.QGuiApplication.setPalette(light_theme)
             self.mainUi.setStyleSheet("""
@@ -257,6 +257,9 @@ class mainUi(QtWidgets.QMainWindow):  #QDialog will only have close button and s
         self.setWindowFlags(QtCore.Qt.Window | QtCore.Qt.MSWindowsFixedSizeDialogHint | QtCore.Qt.WindowMinimizeButtonHint | QtCore.Qt.WindowCloseButtonHint)
         #self.setWindowFlags(QtCore.Qt.Tool) #no taskbar button
         self.default_palette = QtGui.QGuiApplication.palette()
+        #hotkey
+        # self.hotSwitch = QtWidgets.QShortcut(QtGui.QKeySequence("Ctrl+M"), self)
+        # self.hotSwitch.activated.connect(SystemTrayIcon._theme)
         #change text
         self.setWindowTitle(title+' '+ver)
         self.ui.titleLbl.setText(titlef)
