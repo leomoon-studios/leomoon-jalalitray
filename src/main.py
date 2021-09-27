@@ -260,7 +260,7 @@ class SystemTrayIcon(QtWidgets.QSystemTrayIcon):
         self.cDate = jalali.Gregorian(datetime.now().date()).persian_string()
         if self.pDate != self.cDate:
             clean = self.cDate.split('-')
-            self.jalalifAction.setText(self.dow()+'، '+clean[2]+' '+jMonths[int(clean[1])]+' '+clean[0])
+            self.jalalifAction.setText(self.dow()+'، '+clean[2]+' '+jMonths[int(clean[1])-1]+' '+clean[0])
             self.miladifAction.setText(datetime.today().strftime("%A, %d %b, %Y"))
             if len(clean[1]) == 1:
                 clean[1] = '0'+clean[1]
