@@ -51,12 +51,24 @@ class SystemTrayIcon(QtWidgets.QSystemTrayIcon):
         titleAction = menu.addAction(title+' '+ver)
         titleAction.setEnabled(False)
         menu.addSeparator()
-        self.dayOfWeekAction = menu.addAction('')
-        self.dayOfWeekAction.setEnabled(False)
-        self.jalaliAction = menu.addAction('Jalali: ')
-        self.jalaliAction.setEnabled(False)
-        self.miladiAction = menu.addAction('Miladi: ')
-        self.miladiAction.setEnabled(False)
+        jtitleAction = menu.addAction('جلالی')
+        jtitleAction.setEnabled(False)
+        menu.addSeparator()
+        self.jalalifAction = menu.addAction('')
+        self.jalalifAction.setFont(QtGui.QFont('Vazir FD', 10))
+        self.jalalifAction.triggered.connect(self._jalalifCopy)
+        self.jalaliAction = menu.addAction(' :جلالی')
+        self.jalaliAction.setFont(QtGui.QFont('Vazir FD', 10))
+        self.jalaliAction.triggered.connect(self._jalaliCopy)
+        mtitleAction = menu.addAction('میلادی')
+        mtitleAction.setEnabled(False)
+        menu.addSeparator()
+        self.miladifAction = menu.addAction('')
+        self.miladifAction.triggered.connect(self._miladifCopy)
+        self.miladiAction = menu.addAction('میلادی: ')
+        self.miladiAction.triggered.connect(self._miladiCopy)
+        # self.miladiAction.setFont(QtGui.QFont('Vazir FD', 10))
+        self.miladiAction.triggered.connect(self._miladiCopy)
         menu.addSeparator()
         converterWin = menu.addAction("Open Date Converter")
         converterWin.triggered.connect(self.converter)
@@ -88,6 +100,40 @@ class SystemTrayIcon(QtWidgets.QSystemTrayIcon):
         self.activated.connect(self.onTrayIcon)
         diag = QtWidgets.QColorDialog()
         self.timer()
+
+    def _jalalifCopy(self):
+        self.cDate = jalali.Gregorian(datetime.now().date()).persian_string()
+        clean = self.cDate.split('-')
+        clipboard = QtWidgets.QApplication.clipboard()
+        clipboard.setText(self.dow()+'، '+clean[2]+' '+jMonths[int(clean[1])]+' '+clean[0])
+        # print(self.dow()+'، '+clean[2]+' '+jMonths[int(clean[1])]+' '+clean[0])
+
+
+    def _jalaliCopy(self):
+        self.cDate = jalali.Gregorian(datetime.now().date()).persian_string()
+        clean = self.cDate.split('-')
+        if len(clean[1]) == 1:
+            clean[1] = '0'+clean[1]
+        if len(clean[2]) == 1:
+            clean[2] = '0'+clean[2]
+        clipboard = QtWidgets.QApplication.clipboard()
+        clipboard.setText(clean[0]+'-'+clean[1]+'-'+clean[2])
+        # print(clean[0]+'-'+clean[1]+'-'+clean[2])
+
+    def _miladifCopy(self):
+        clipboard = QtWidgets.QApplication.clipboard()
+        clipboard.setText(datetime.today().strftime("%A, %d %b, %Y"))
+        # print(datetime.today().strftime("%A, %d %b, %Y"))
+
+    def _miladiCopy(self):
+        clean2 = str(datetime.now().date()).split('-')
+        if len(clean2[1]) == 1:
+            clean2[1] = '0'+clean2[1]
+        if len(clean2[2]) == 1:
+            clean2[2] = '0'+clean2[2]
+        clipboard = QtWidgets.QApplication.clipboard()
+        clipboard.setText(clean2[0]+'-'+clean2[1]+'-'+clean2[2])
+        # print(clean2[0]+'-'+clean2[1]+'-'+clean2[2])
 
     def onTrayIcon(self, reason):
         if sys.platform.startswith('win'):
@@ -214,15 +260,17 @@ class SystemTrayIcon(QtWidgets.QSystemTrayIcon):
         self.cDate = jalali.Gregorian(datetime.now().date()).persian_string()
         if self.pDate != self.cDate:
             clean = self.cDate.split('-')
+            self.jalalifAction.setText(self.dow()+'، '+clean[2]+' '+jMonths[int(clean[1])]+' '+clean[0])
+            self.miladifAction.setText(datetime.today().strftime("%A, %d %b, %Y"))
             if len(clean[1]) == 1:
                 clean[1] = '0'+clean[1]
             if len(clean[2]) == 1:
                 clean[2] = '0'+clean[2]
+            clean2 = str(datetime.now().date()).split('-')
             self.setToolTip(title+' '+ver+"\n\n"+datetime.today().strftime("%A")+' | '+self.dow()+"\n"+'Jalali: '+clean[0]+'-'+clean[1]+'-'+clean[2]+'\n'+'Miladi: '+str(datetime.now().date()))
             self.trayChange(clean[2])
-            self.dayOfWeekAction.setText(datetime.today().strftime("%A")+' | '+self.dow())
-            self.jalaliAction.setText('Jalali: '+clean[0]+'-'+clean[1]+'-'+clean[2])
-            self.miladiAction.setText('Miladi: '+str(datetime.now().date()))
+            self.jalaliAction.setText(clean[0]+'-'+clean[1]+'-'+clean[2])
+            self.miladiAction.setText(clean2[0]+'-'+clean2[1]+'-'+clean2[2])
             self.pDate = self.cDate
         return self.cDate
 
