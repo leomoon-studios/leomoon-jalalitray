@@ -363,12 +363,25 @@ class mainUi(QtWidgets.QMainWindow):  #QDialog will only have close button and s
         return False
 
     def jalaliYChange(self):
+        if self.ui.jalaliMCbox.currentIndex() == 11: #29
+            if self.kabise(self.ui.jalaliYCbox.currentText())[0]:
+                print('kabise')
+                self.ui.jalaliDCbox.clear()
+                self.ui.jalaliDCbox.addItems(thirty)
+            else:
+                self.ui.jalaliDCbox.clear()
+                self.ui.jalaliDCbox.addItems(twentynine)
         self.jalali2miladi(self.ui.jalaliYCbox.currentText(), str(int(self.ui.jalaliMCbox.currentIndex()+1)), self.ui.jalaliDCbox.currentText())
 
     def jalaliMChange(self):
         self.ui.jalaliDCbox.clear()
         if self.ui.jalaliMCbox.currentIndex() == 11: #29
-            self.ui.jalaliDCbox.addItems(twentynine)
+            if self.kabise(self.ui.jalaliYCbox.currentText())[0]:
+                self.ui.jalaliDCbox.clear()
+                self.ui.jalaliDCbox.addItems(thirty)
+            else:
+                self.ui.jalaliDCbox.clear()
+                self.ui.jalaliDCbox.addItems(twentynine)
         if self.check(self.ui.jalaliMCbox.currentIndex(), [6,7,8,9,10]): #30
             self.ui.jalaliDCbox.addItems(thirty)
         if self.check(self.ui.jalaliMCbox.currentIndex(), [0,1,2,3,4,5]): #31
@@ -388,19 +401,31 @@ class mainUi(QtWidgets.QMainWindow):  #QDialog will only have close button and s
         oMiladi = jalali.Persian(iJalali).gregorian_string()
         oMiladiList = oMiladi.split('-')
         dow = self.dayOfWeek(oMiladi)
-        oMiladiFormatted = dow+', '+mMonths[int(oMiladiList[1])-1]+' '+oMiladiList[2]+', '+oMiladiList[0]+self.leap(oMiladiList[0])
+        oMiladiFormatted = dow+', '+mMonths[int(oMiladiList[1])-1]+' '+oMiladiList[2]+', '+oMiladiList[0]+self.leap(oMiladiList[0])[1]
         self.ui.j2mLbl.setText(oMiladiFormatted)
 
     def miladiYChange(self):
+        if self.ui.miladiMCbox.currentIndex() == 1: #29
+            if self.leap(self.ui.miladiYCbox.currentText())[0]:
+                self.ui.miladiDCbox.clear()
+                self.ui.miladiDCbox.addItems(twentynine)
+            else:
+                self.ui.miladiDCbox.clear()
+                self.ui.miladiDCbox.addItems(twentyeight)
         self.miladi2jalali(self.ui.miladiYCbox.currentText(), str(int(self.ui.miladiMCbox.currentIndex()+1)), self.ui.miladiDCbox.currentText())
 
     def miladiMChange(self):
         self.ui.miladiDCbox.clear()
-        if self.ui.miladiMCbox.currentIndex() == 11: #29
-            self.ui.miladiDCbox.addItems(twentynine)
-        if self.check(self.ui.miladiMCbox.currentIndex(), [6,7,8,9,10]): #30
+        if self.ui.miladiMCbox.currentIndex() == 1: #29
+            if self.leap(self.ui.miladiYCbox.currentText())[0]:
+                self.ui.miladiDCbox.clear()
+                self.ui.miladiDCbox.addItems(twentynine)
+            else:
+                self.ui.miladiDCbox.clear()
+                self.ui.miladiDCbox.addItems(twentyeight)
+        if self.check(self.ui.miladiMCbox.currentIndex(), [3,5,8,10]): #30
             self.ui.miladiDCbox.addItems(thirty)
-        if self.check(self.ui.miladiMCbox.currentIndex(), [0,1,2,3,4,5]): #31
+        if self.check(self.ui.miladiMCbox.currentIndex(), [0,2,4,6,7,9,11]): #31
             self.ui.miladiDCbox.addItems(thirtyone)
         self.miladi2jalali(self.ui.miladiYCbox.currentText(), str(int(self.ui.miladiMCbox.currentIndex()+1)), self.ui.miladiDCbox.currentText())
 
@@ -424,7 +449,7 @@ class mainUi(QtWidgets.QMainWindow):  #QDialog will only have close button and s
         if dow == 'Friday': dow = jDays[4]
         if dow == 'Saturday': dow = jDays[5]
         if dow == 'Sunday': dow = jDays[6]
-        oJalaliFormatted = dow+'، '+oJalaliList[2]+' '+jMonths[int(oJalaliList[1])-1]+'، '+oJalaliList[0]+self.kabise(oJalaliList[0])
+        oJalaliFormatted = dow+'، '+oJalaliList[2]+' '+jMonths[int(oJalaliList[1])-1]+'، '+oJalaliList[0]+self.kabise(oJalaliList[0])[1]
         self.ui.m2jLbl.setText(oJalaliFormatted)
 
     def dayOfWeek(self, var):
@@ -432,16 +457,16 @@ class mainUi(QtWidgets.QMainWindow):  #QDialog will only have close button and s
 
     def leap(self, year):
         if (int(year) % 4 == 0 and int(year) % 100 != 0 or int(year) % 400 == 0):
-            return(' (Leap Year)')
+            return(True, ' (Leap Year)')
         else:
-            return(' (Normal Year)')
+            return(False, ' (Normal Year)')
 
     def kabise(self, year):
         nums = [1, 5, 9, 13, 17, 22, 26, 30]
         for x in nums:
             if int(year) % 33 == x:
-                return (' (سال کبیسه)')
-        return (' (سال عادی)')
+                return (True, ' (سال کبیسه)')
+        return (False, ' (سال عادی)')
 
 def main():
     app = QtWidgets.QApplication(sys.argv)
