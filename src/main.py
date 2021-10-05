@@ -13,7 +13,7 @@ from ext.darkdetect import isDark #darkdetect 0.5.0 [ https://github.com/alberto
 if sys.platform.startswith('win'):
     import winreg #startup reg
 
-#version: 1.0.6
+#version: 1.0.7
 
 QtWidgets.QApplication.setAttribute(QtCore.Qt.AA_EnableHighDpiScaling, True) #enable highdpi scaling
 QtWidgets.QApplication.setAttribute(QtCore.Qt.AA_UseHighDpiPixmaps, True) #use highdpi icons
