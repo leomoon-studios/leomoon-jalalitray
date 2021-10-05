@@ -365,7 +365,6 @@ class mainUi(QtWidgets.QMainWindow):  #QDialog will only have close button and s
     def jalaliYChange(self):
         if self.ui.jalaliMCbox.currentIndex() == 11: #29
             if self.kabise(self.ui.jalaliYCbox.currentText())[0]:
-                print('kabise')
                 self.ui.jalaliDCbox.clear()
                 self.ui.jalaliDCbox.addItems(thirty)
             else:
