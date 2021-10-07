@@ -79,7 +79,7 @@ class SystemTrayIcon(QtWidgets.QSystemTrayIcon):
             self.startupMenu.setCheckable(True)
             try:
                 #try query startup key. if exists then startup is true
-                value, regtype = winreg.QueryValueEx(winreg.OpenKey(winreg.HKEY_CURRENT_USER, r'SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run', 0, winreg.KEY_READ), 'LeoMoon JalaliTrays')
+                winreg.QueryValueEx(winreg.OpenKey(winreg.HKEY_CURRENT_USER, r'SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run', 0, winreg.KEY_READ), 'LeoMoon JalaliTray')
                 self.startupMenu.setChecked(True)
             except Exception as e:
                 pass
