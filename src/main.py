@@ -92,6 +92,9 @@ class SystemTrayIcon(QtWidgets.QSystemTrayIcon):
         if isDark():
             self.themeFlg = False
             self._theme()
+        else:
+            self.themeFlg = True
+            self._theme()
         websiteAction = menu.addAction("Visit LeoMoon Studios website")
         websiteAction.triggered.connect(self.website)
         exitAction = menu.addAction("Exit")
