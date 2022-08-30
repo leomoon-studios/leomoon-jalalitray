@@ -9,11 +9,11 @@ from PyQt5 import QtWidgets, QtCore, QtGui
 import resources_rc
 import ext.jalali as jalali #https://github.com/mjnaderi/Jalali.py 20140725
 from gui.guiMain import Ui_main
-from ext.darkdetect import isDark #darkdetect 0.5.0 [ https://github.com/albertosottile/darkdetect ] 20210912
+from ext.darkdetect import isDark #darkdetect 0.7.1 [ https://github.com/albertosottile/darkdetect ] 20220718
 if sys.platform.startswith('win'):
     import winreg #startup reg
 
-#version: 1.0.7
+#version: 1.0.8
 
 QtWidgets.QApplication.setAttribute(QtCore.Qt.AA_EnableHighDpiScaling, True) #enable highdpi scaling
 QtWidgets.QApplication.setAttribute(QtCore.Qt.AA_UseHighDpiPixmaps, True) #use highdpi icons
@@ -21,10 +21,11 @@ QtWidgets.QApplication.setAttribute(QtCore.Qt.AA_UseHighDpiPixmaps, True) #use h
 title = 'LeoMoon JalaliTray'
 titlef = 'دگردیس سالنامه پارسی'
 ver = '1.0.0'
-jYearLst = list(range(1200, 1501))
-jYearLst = [str(x) for x in jYearLst]
-mYearLst = list(range(1800, 2201))
+
+mYearLst = list(range(1800, datetime.today().year + 1))
 mYearLst = [str(x) for x in mYearLst]
+jYearLst = list(range(1200, int(jalali.Gregorian(datetime.today().strftime('%Y-%m-%d')).persian_tuple()[0]) + 1))
+jYearLst = [str(x) for x in jYearLst]
 twentyeight = list(range(1, 28+1))
 twentyeight = [str(x) for x in twentyeight]
 twentynine = list(range(1, 29+1))
@@ -398,13 +399,17 @@ class mainUi(QtWidgets.QMainWindow):  #QDialog will only have close button and s
             self.jDayVal = self.ui.jalaliDCbox.currentText()
         self.jalali2miladi(self.ui.jalaliYCbox.currentText(), str(int(self.ui.jalaliMCbox.currentIndex()+1)), self.jDayVal)
 
+    def calculateAge(self, born):
+        age = int((datetime.today() - born).days / 365.2425)
+        return str(age)
+
     def jalali2miladi(self, year, month, day):
         iJalali = year+'-'+month+'-'+day
         oMiladi = jalali.Persian(iJalali).gregorian_string()
         oMiladiList = oMiladi.split('-')
         dow = self.dayOfWeek(oMiladi)
         oMiladiFormatted = dow+', '+mMonths[int(oMiladiList[1])-1]+' '+oMiladiList[2]+', '+oMiladiList[0]+self.leap(oMiladiList[0])[1]
-        self.ui.j2mLbl.setText(oMiladiFormatted)
+        self.ui.j2mLbl.setText(oMiladiFormatted + ': ' + self.calculateAge(datetime(int(oMiladiList[0]), int(oMiladiList[1]), int(oMiladiList[2]))) + " years old")
 
     def miladiYChange(self):
         if self.ui.miladiMCbox.currentIndex() == 1: #29
@@ -452,7 +457,7 @@ class mainUi(QtWidgets.QMainWindow):  #QDialog will only have close button and s
         if dow == 'Saturday': dow = jDays[5]
         if dow == 'Sunday': dow = jDays[6]
         oJalaliFormatted = dow+'، '+oJalaliList[2]+' '+jMonths[int(oJalaliList[1])-1]+'، '+oJalaliList[0]+self.kabise(oJalaliList[0])[1]
-        self.ui.m2jLbl.setText(oJalaliFormatted)
+        self.ui.m2jLbl.setText(oJalaliFormatted + ': ' + self.calculateAge(datetime(int(year), int(month), int(day))) + " ساله")
 
     def dayOfWeek(self, var):
         return(calendar.day_name[datetime.strptime(var, '%Y-%m-%d').weekday()])
