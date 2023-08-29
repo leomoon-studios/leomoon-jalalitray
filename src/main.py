@@ -1,12 +1,16 @@
 #-*- coding: utf-8 -*-
 
 # import os #open notepad test
+import os
 import sys
+#load dlls used by cairo
+dllpath = os.path.dirname(os.path.realpath(sys.argv[0]))
+os.environ["PATH"] += os.pathsep + dllpath
+os.environ["DYLD_FALLBACK_LIBRARY_PATH"] = dllpath
 from datetime import datetime
 import calendar
 import webbrowser #web links
 from PyQt5 import QtWidgets, QtCore, QtGui
-import resources_rc
 import ext.jalali as jalali #https://github.com/mjnaderi/Jalali.py 20140725
 from gui.guiMain import Ui_main
 from ext.darkdetect import isDark #darkdetect 0.7.1 [ https://github.com/albertosottile/darkdetect ] 20220718
