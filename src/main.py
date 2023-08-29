@@ -1,9 +1,13 @@
 #-*- coding: utf-8 -*-
 
+#version: 1.0.8
+
+# TODO:
+
 # import os #open notepad test
 import os
 import sys
-#load dlls used by cairo
+#load dlls
 dllpath = os.path.dirname(os.path.realpath(sys.argv[0]))
 os.environ["PATH"] += os.pathsep + dllpath
 os.environ["DYLD_FALLBACK_LIBRARY_PATH"] = dllpath
@@ -16,8 +20,6 @@ from gui.guiMain import Ui_main
 from ext.darkdetect import isDark #darkdetect 0.7.1 [ https://github.com/albertosottile/darkdetect ] 20220718
 if sys.platform.startswith('win'):
     import winreg #startup reg
-
-#version: 1.0.8
 
 QtWidgets.QApplication.setAttribute(QtCore.Qt.AA_EnableHighDpiScaling, True) #enable highdpi scaling
 QtWidgets.QApplication.setAttribute(QtCore.Qt.AA_UseHighDpiPixmaps, True) #use highdpi icons
