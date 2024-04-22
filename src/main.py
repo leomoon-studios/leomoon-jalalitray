@@ -1,6 +1,6 @@
 #-*- coding: utf-8 -*-
 
-#version: 1.0.8
+#version: 1.0.9
 
 # TODO:
 
@@ -109,15 +109,13 @@ class SystemTrayIcon(QtWidgets.QSystemTrayIcon):
         self.setContextMenu(menu)
         self.activated.connect(self.onTrayIcon)
         diag = QtWidgets.QColorDialog()
-        self.timer()
+        self.start_timer()
 
     def _jalalifCopy(self):
         self.cDate = jalali.Gregorian(datetime.now().date()).persian_string()
         clean = self.cDate.split('-')
         clipboard = QtWidgets.QApplication.clipboard()
-        clipboard.setText(self.dow()+'، '+clean[2]+' '+jMonths[int(clean[1])]+' '+clean[0])
-        # print(self.dow()+'، '+clean[2]+' '+jMonths[int(clean[1])]+' '+clean[0])
-
+        clipboard.setText(self.dow()+'، '+clean[2]+' '+jMonths[int(clean[1])-1]+' '+clean[0])
 
     def _jalaliCopy(self):
         self.cDate = jalali.Gregorian(datetime.now().date()).persian_string()
@@ -293,7 +291,7 @@ class SystemTrayIcon(QtWidgets.QSystemTrayIcon):
         n = datetime.now()
         return ((24 - n.hour - 1) * 60 * 60) + ((60 - n.minute - 1) * 60) + (60 - n.second)
 
-    def timer(self):
+    def start_timer(self):
         """timer for check function"""
         self.timer = QtCore.QTimer(self)
         self.timer.timeout.connect(self.check)
