@@ -7,7 +7,7 @@ rm -rf "`pwd`/dist/build"
 rm -rf "`pwd`/dist/$AppName.app"
 rm -rf "`pwd`/dist/$AppName"
 # build python
-python3 -m PyInstaller --add-binary *.dylib:. --clean --windowed --onedir --noupx --name "$AppName" --icon=main.icns main.py
+python3 -m PyInstaller --clean --windowed --onedir --noupx --name "$AppName" --icon=main.icns main.py
 # mods
 sed -i '' 's/<\/dict>/<key>NSHighResolutionCapable<\/key><true\/><\/dict>/g' "`pwd`/dist/$AppName.app/Contents/Info.plist"
 sed -i '' 's/<string>0.0.0<\/string>/<string>'$buildver'<\/string><key>CFBundleVersion<\/key><string>'$buildver'<\/string>/' "`pwd`/dist/$AppName.app/Contents/Info.plist"
