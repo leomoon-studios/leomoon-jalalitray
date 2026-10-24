@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Name=LeoMoon JalaliTray
+Comment=Jalali calendar and date converter
+Exec=leomoon-jalalitray
+Icon=com.leomoon.JalaliTray
+Categories=Utility;
+Terminal=false
+StartupNotify=true

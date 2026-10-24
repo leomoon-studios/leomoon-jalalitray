@@ -476,6 +476,12 @@ class mainUi(QtWidgets.QMainWindow):  #QDialog will only have close button and s
         return (False, ' (سال عادی)')
 
 def main():
+    if "--smoke-test" in sys.argv:
+        if gregorian_to_jalali(date(2024, 3, 20)) != (1403, 1, 1):
+            raise RuntimeError("Gregorian to Jalali smoke conversion failed")
+        if jalali_to_gregorian(1403, 1, 1) != date(2024, 3, 20):
+            raise RuntimeError("Jalali to Gregorian smoke conversion failed")
+        return
     app = QtWidgets.QApplication(sys.argv)
     app.setStyle('Fusion')
     QtGui.QFontDatabase.addApplicationFont(':/res/fonts/Vazir.ttf') #add custom font no install

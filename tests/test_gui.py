@@ -41,3 +41,14 @@ def test_all_embedded_fonts_and_tray_icons_exist(qapp: QtWidgets.QApplication) -
         assert QtGui.QFontDatabase.addApplicationFont(resource) != -1
     for day in range(1, 32):
         assert QtCore.QFile.exists(f":/res/tray/{day:02d}.svg")
+
+
+def test_packaged_smoke_mode_exercises_both_date_conversion_directions() -> None:
+    from leomoon_jalalitray import app
+
+    original_arguments = app.sys.argv
+    try:
+        app.sys.argv = ["leomoon-jalalitray", "--smoke-test"]
+        assert app.main() is None
+    finally:
+        app.sys.argv = original_arguments
