@@ -1,6 +1,8 @@
 #define AppName "LeoMoon JalaliTray"
 #define AppShortName "JalaliTray"
-#define AppVersion "1.0.0"
+#ifndef AppVersion
+  #error AppVersion must be supplied by the release metadata.
+#endif
 #define AppExeName "LeoMoon JalaliTray.exe"
 #define CompanyName "LeoMoon Studios"
 #define AppWebsiteName "LeoMoon Studios Homepage"

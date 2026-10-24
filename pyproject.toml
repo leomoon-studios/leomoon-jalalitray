@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "leomoon-jalalitray"
-version = "0.0.0"
+dynamic = ["version"]
 description = "A system tray Jalali calendar and date converter."
 readme = "README.md"
 requires-python = ">=3.12"

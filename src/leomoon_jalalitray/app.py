@@ -1,7 +1,5 @@
 #-*- coding: utf-8 -*-
 
-#version: 1.0.9
-
 # TODO:
 
 # import os #open notepad test
@@ -32,13 +30,14 @@ from .calendar_logic import (
     tray_icon_resource,
 )
 from ._generated.main_window import Ui_main
+from .version import __version__
 from darkdetect import isDark
 if sys.platform.startswith('win'):
     import winreg #startup reg
 
 title = 'LeoMoon JalaliTray'
 titlef = 'دگردیس سالنامه پارسی'
-ver = '1.0.0'
+ver = __version__
 
 mYearLst = gregorian_year_choices()
 jYearLst = jalali_year_choices()

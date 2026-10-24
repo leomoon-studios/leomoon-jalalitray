@@ -7,10 +7,11 @@ from PySide6 import QtCore, QtGui, QtWidgets
 
 def test_converter_window_constructs_with_rolling_year_choices(qapp: QtWidgets.QApplication) -> None:
     from leomoon_jalalitray import app as main
+    from leomoon_jalalitray.version import __version__
 
     window = main.mainUi()
 
-    assert window.windowTitle() == "LeoMoon JalaliTray 1.0.0"
+    assert window.windowTitle() == f"LeoMoon JalaliTray {__version__}"
     assert window.ui.miladiYCbox.itemText(window.ui.miladiYCbox.count() - 1) == str(date.today().year + 100)
     assert int(window.ui.jalaliYCbox.itemText(window.ui.jalaliYCbox.count() - 1)) >= 1500
     window.close()

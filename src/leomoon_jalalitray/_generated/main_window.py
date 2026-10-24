@@ -307,7 +307,7 @@ class Ui_main(object):
         main.setWindowTitle(QCoreApplication.translate("main", u"MainWindow", None))
         self.logoLbl.setText("")
         self.titleLbl.setText(QCoreApplication.translate("main", u"Title", None))
-        self.verLbl.setText(QCoreApplication.translate("main", u"1.0.0", None))
+        self.verLbl.setText(QCoreApplication.translate("main", u"Version", None))
         self.jalaliGrp.setTitle(QCoreApplication.translate("main", u"\u062c\u0644\u0627\u0644\u06cc \u0628\u0647 \u0645\u06cc\u0644\u0627\u062f\u06cc", None))
         self.jalaliMCbox.setItemText(0, QCoreApplication.translate("main", u"\u0641\u0631\u0648\u0631\u062f\u06cc\u0646", None))
         self.jalaliMCbox.setItemText(1, QCoreApplication.translate("main", u"\u0627\u0631\u062f\u06cc\u0628\u0647\u0634\u062a", None))
