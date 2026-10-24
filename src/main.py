@@ -11,11 +11,27 @@ import sys
 dllpath = os.path.dirname(os.path.realpath(sys.argv[0]))
 os.environ["PATH"] += os.pathsep + dllpath
 os.environ["DYLD_FALLBACK_LIBRARY_PATH"] = dllpath
-from datetime import datetime
+from datetime import date, datetime
 import calendar
 import webbrowser #web links
 from PyQt5 import QtWidgets, QtCore, QtGui
-import ext.jalali as jalali #https://github.com/mjnaderi/Jalali.py 20140725
+from calendar_logic import (
+    GREGORIAN_MONTHS,
+    JALALI_MONTHS,
+    JALALI_WEEKDAYS,
+    age_years,
+    date_to_unpadded_iso,
+    gregorian_to_jalali,
+    gregorian_year_choices,
+    is_gregorian_leap_year,
+    is_jalali_leap_year,
+    jalali_to_gregorian,
+    jalali_weekday,
+    jalali_year_choices,
+    seconds_until_midnight,
+    tray_icon_resource,
+    windows_startup_command,
+)
 from gui.guiMain import Ui_main
 from ext.darkdetect import isDark #darkdetect 0.7.1 [ https://github.com/albertosottile/darkdetect ] 20220718
 if sys.platform.startswith('win'):
@@ -28,10 +44,8 @@ title = 'LeoMoon JalaliTray'
 titlef = 'دگردیس سالنامه پارسی'
 ver = '1.0.0'
 
-mYearLst = list(range(1800, datetime.today().year + 1))
-mYearLst = [str(x) for x in mYearLst]
-jYearLst = list(range(1200, int(jalali.Gregorian(datetime.today().strftime('%Y-%m-%d')).persian_tuple()[0]) + 1))
-jYearLst = [str(x) for x in jYearLst]
+mYearLst = gregorian_year_choices()
+jYearLst = jalali_year_choices()
 twentyeight = list(range(1, 28+1))
 twentyeight = [str(x) for x in twentyeight]
 twentynine = list(range(1, 29+1))
@@ -40,17 +54,16 @@ thirty = list(range(1, 30+1))
 thirty = [str(x) for x in thirty]
 thirtyone = list(range(1, 31+1))
 thirtyone = [str(x) for x in thirtyone]
-jDays = ['دوشنبه', 'سه‌شنبه', 'چهارشنبه', 'پنجشنبه', 'جمعه', 'شنبه', 'یکشنبه']
-jMonths = ['فروردین', 'اردیبهشت', 'خرداد', 'تیر', 'مرداد', 'شهریور', 'مهر', 'آبان', 'آذر', 'دی', 'بهمن', 'اسفند']
-mDays = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
-mMonths = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
+jDays = JALALI_WEEKDAYS
+jMonths = JALALI_MONTHS
+mMonths = GREGORIAN_MONTHS
 
 class SystemTrayIcon(QtWidgets.QSystemTrayIcon):
     def __init__(self, icon, parent=None):
         self.themeFlg = False
         self.sleep = 1 #sleep amount for timer
         self.pDate = "0000-00-00"
-        self.cDate = jalali.Gregorian(datetime.now().date()).persian_string()
+        self.cDate = date_to_unpadded_iso(gregorian_to_jalali(datetime.now().date()))
         self.mainUi = mainUi(self)
         QtWidgets.QSystemTrayIcon.__init__(self, icon, parent)
         self.setToolTip(title+' '+ver)
@@ -112,13 +125,13 @@ class SystemTrayIcon(QtWidgets.QSystemTrayIcon):
         self.start_timer()
 
     def _jalalifCopy(self):
-        self.cDate = jalali.Gregorian(datetime.now().date()).persian_string()
+        self.cDate = date_to_unpadded_iso(gregorian_to_jalali(datetime.now().date()))
         clean = self.cDate.split('-')
         clipboard = QtWidgets.QApplication.clipboard()
         clipboard.setText(self.dow()+'، '+clean[2]+' '+jMonths[int(clean[1])-1]+' '+clean[0])
 
     def _jalaliCopy(self):
-        self.cDate = jalali.Gregorian(datetime.now().date()).persian_string()
+        self.cDate = date_to_unpadded_iso(gregorian_to_jalali(datetime.now().date()))
         clean = self.cDate.split('-')
         if len(clean[1]) == 1:
             clean[1] = '0'+clean[1]
@@ -265,7 +278,7 @@ class SystemTrayIcon(QtWidgets.QSystemTrayIcon):
 
     def check(self):
         """check and see if date has changed"""
-        self.cDate = jalali.Gregorian(datetime.now().date()).persian_string()
+        self.cDate = date_to_unpadded_iso(gregorian_to_jalali(datetime.now().date()))
         if self.pDate != self.cDate:
             clean = self.cDate.split('-')
             self.jalalifAction.setText(self.dow()+'، '+clean[2]+' '+jMonths[int(clean[1])-1]+' '+clean[0])
@@ -284,12 +297,11 @@ class SystemTrayIcon(QtWidgets.QSystemTrayIcon):
 
     def trayChange(self, day):
         """changes tray icon based on day value of check method"""
-        self.setIcon(QtGui.QIcon(":/res/tray/"+day+".svg"))
+        self.setIcon(QtGui.QIcon(tray_icon_resource(int(day))))
 
     def midnight(self):
         """get the number of seconds until midnight"""
-        n = datetime.now()
-        return ((24 - n.hour - 1) * 60 * 60) + ((60 - n.minute - 1) * 60) + (60 - n.second)
+        return seconds_until_midnight()
 
     def start_timer(self):
         """timer for check function"""
@@ -404,12 +416,10 @@ class mainUi(QtWidgets.QMainWindow):  #QDialog will only have close button and s
         self.jalali2miladi(self.ui.jalaliYCbox.currentText(), str(int(self.ui.jalaliMCbox.currentIndex()+1)), self.jDayVal)
 
     def calculateAge(self, born):
-        age = int((datetime.today() - born).days / 365.2425)
-        return str(age)
+        return str(age_years(born.date()))
 
     def jalali2miladi(self, year, month, day):
-        iJalali = year+'-'+month+'-'+day
-        oMiladi = jalali.Persian(iJalali).gregorian_string()
+        oMiladi = date_to_unpadded_iso(jalali_to_gregorian(int(year), int(month), int(day)))
         oMiladiList = oMiladi.split('-')
         dow = self.dayOfWeek(oMiladi)
         oMiladiFormatted = dow+', '+mMonths[int(oMiladiList[1])-1]+' '+oMiladiList[2]+', '+oMiladiList[0]+self.leap(oMiladiList[0])[1]
@@ -449,17 +459,10 @@ class mainUi(QtWidgets.QMainWindow):  #QDialog will only have close button and s
         self.miladi2jalali(self.ui.miladiYCbox.currentText(), str(int(self.ui.miladiMCbox.currentIndex()+1)), self.mDayVal)
 
     def miladi2jalali(self, year, month, day):
-        iMiladi = year+'-'+month+'-'+day
-        oJalali = jalali.Gregorian(iMiladi).persian_string()
+        converted_date = date(int(year), int(month), int(day))
+        oJalali = date_to_unpadded_iso(gregorian_to_jalali(converted_date))
         oJalaliList = oJalali.split('-')
-        dow = self.dayOfWeek(year+'-'+month+'-'+day)
-        if dow == 'Monday': dow = jDays[0]
-        if dow == 'Tuesday': dow = jDays[1]
-        if dow == 'Wednesday': dow = jDays[2]
-        if dow == 'Thursday': dow = jDays[3]
-        if dow == 'Friday': dow = jDays[4]
-        if dow == 'Saturday': dow = jDays[5]
-        if dow == 'Sunday': dow = jDays[6]
+        dow = jalali_weekday(converted_date)
         oJalaliFormatted = dow+'، '+oJalaliList[2]+' '+jMonths[int(oJalaliList[1])-1]+'، '+oJalaliList[0]+self.kabise(oJalaliList[0])[1]
         self.ui.m2jLbl.setText(oJalaliFormatted + ': ' + self.calculateAge(datetime(int(year), int(month), int(day))) + " ساله")
 
@@ -467,16 +470,14 @@ class mainUi(QtWidgets.QMainWindow):  #QDialog will only have close button and s
         return(calendar.day_name[datetime.strptime(var, '%Y-%m-%d').weekday()])
 
     def leap(self, year):
-        if (int(year) % 4 == 0 and int(year) % 100 != 0 or int(year) % 400 == 0):
+        if is_gregorian_leap_year(int(year)):
             return(True, ' (Leap Year)')
         else:
             return(False, ' (Normal Year)')
 
     def kabise(self, year):
-        nums = [1, 5, 9, 13, 17, 22, 26, 30]
-        for x in nums:
-            if int(year) % 33 == x:
-                return (True, ' (سال کبیسه)')
+        if is_jalali_leap_year(int(year)):
+            return (True, ' (سال کبیسه)')
         return (False, ' (سال عادی)')
 
 def main():
