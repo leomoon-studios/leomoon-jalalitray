@@ -16,6 +16,8 @@ LeoMoon JalaliTray uses PersianTools 6.2.0, copyright Majid Hajiloo and contribu
 
 ## Qt for Python and Qt 6
 
-JalaliTray uses PySide6 6.12.0 and Qt 6.12.0. PySide6 package metadata identifies the available license expression as `LGPL-3.0-only OR GPL-2.0-only OR GPL-3.0-only`.
+LeoMoon JalaliTray uses PySide6 6.12.0 and Qt 6.12.0. PySide6 package metadata identifies the available license expression as `LGPL-3.0-only OR GPL-2.0-only OR GPL-3.0-only`.
 
-The repository has not selected its project license or the corresponding PySide6 distribution option yet. Step 6 must make that selection and include the complete required license texts before any release.
+PySide6, PySide6-Essentials, PySide6-Addons, and Shiboken6 are copyright The Qt Company Ltd. and other contributors. Qt for Python licensing information is available at <https://doc.qt.io/qtforpython-6/licenses.html>.
+
+Every Windows installer, Linux AppImage, and macOS DMG includes this notice. The project distribution license and the applicable Qt license obligations must be reviewed before distributing a signed public release.

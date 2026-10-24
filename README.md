@@ -62,6 +62,12 @@ Release packages are platform-specific: Windows uses x64 and ARM64 Inno Setup in
 
 The platform workflows install the locked dependencies in a project-local `.venv`, regenerate the Qt sources, run Ruff and pytest, build the native bundle, then package and smoke-test the final artifact. Windows and macOS support optional protected signing credentials. Linux AppImage tooling is downloaded with pinned SHA-256 checksums.
 
+## Release builds
+
+Use the **Release** GitHub Actions workflow for a non-publishing platform test. Pushing a `vMAJOR.MINOR.PATCH` tag builds the five packages, verifies their checksums and smoke tests, creates a GitHub release, and adds release notes with linked commits and contributors.
+
+The application executable is named `LeoMoon JalaliTray`. Release asset filenames use the stable `leomoon-jalalitray` slug. Do not commit certificates, private keys, Apple passwords, tokens, package outputs, virtual environments, or signing keychains. Protected GitHub Actions secrets hold optional signing credentials.
+
 ## Settings and privacy
 
 Theme and Start at login preferences are controlled locally from the tray menu. The application does not require an account or send calendar conversion data to a network service.
