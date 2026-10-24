@@ -14,7 +14,7 @@ os.environ["DYLD_FALLBACK_LIBRARY_PATH"] = dllpath
 from datetime import date, datetime
 import calendar
 import webbrowser #web links
-from PyQt5 import QtWidgets, QtCore, QtGui
+from PySide6 import QtCore, QtGui, QtWidgets
 from calendar_logic import (
     GREGORIAN_MONTHS,
     JALALI_MONTHS,
@@ -36,9 +36,6 @@ from gui.guiMain import Ui_main
 from ext.darkdetect import isDark #darkdetect 0.7.1 [ https://github.com/albertosottile/darkdetect ] 20220718
 if sys.platform.startswith('win'):
     import winreg #startup reg
-
-QtWidgets.QApplication.setAttribute(QtCore.Qt.AA_EnableHighDpiScaling, True) #enable highdpi scaling
-QtWidgets.QApplication.setAttribute(QtCore.Qt.AA_UseHighDpiPixmaps, True) #use highdpi icons
 
 title = 'LeoMoon JalaliTray'
 titlef = 'دگردیس سالنامه پارسی'
@@ -167,8 +164,8 @@ class SystemTrayIcon(QtWidgets.QSystemTrayIcon):
                 #        self.mainUi.activateWindow()
                 #else:
                 #    self.mainUi.show()
-                if self.mainUi.windowState() == QtCore.Qt.WindowMinimized:
-                    self.mainUi.setWindowState(QtCore.Qt.WindowNoState)
+                if self.mainUi.windowState() == QtCore.Qt.WindowState.WindowMinimized:
+                    self.mainUi.setWindowState(QtCore.Qt.WindowState.WindowNoState)
                     self.mainUi.activateWindow()
                 elif self.mainUi.isVisible():
                     self.mainUi.hide()
@@ -193,32 +190,32 @@ class SystemTrayIcon(QtWidgets.QSystemTrayIcon):
 
     def converter(self):
         self.mainUi.show()
-        if self.mainUi.windowState() == QtCore.Qt.WindowMinimized:
-            self.mainUi.setWindowState(QtCore.Qt.WindowNoState)
+        if self.mainUi.windowState() == QtCore.Qt.WindowState.WindowMinimized:
+            self.mainUi.setWindowState(QtCore.Qt.WindowState.WindowNoState)
         self.mainUi.activateWindow()
 
     def _theme(self):
         if not self.themeFlg:
             dark_theme = QtGui.QPalette()
-            dark_theme.setColor(QtGui.QPalette.Window, QtGui.QColor(55,53,53))
-            dark_theme.setColor(QtGui.QPalette.WindowText, QtGui.QColor(227,227,227))
-            dark_theme.setColor(QtGui.QPalette.Base, QtGui.QColor(30,30,30))
-            dark_theme.setColor(QtGui.QPalette.AlternateBase, QtGui.QColor(55,55,55))
-            dark_theme.setColor(QtGui.QPalette.ToolTipBase, QtGui.QColor(50,50,50))
-            dark_theme.setColor(QtGui.QPalette.ToolTipText, QtGui.QColor(227,227,227))
-            dark_theme.setColor(QtGui.QPalette.Text, QtGui.QColor(227,227,227))
-            dark_theme.setColor(QtGui.QPalette.Link, QtGui.QColor(227,227,227))
-            dark_theme.setColor(QtGui.QPalette.Button, QtGui.QColor(50,50,50))
-            dark_theme.setColor(QtGui.QPalette.ButtonText, QtGui.QColor(227,227,227))
-            dark_theme.setColor(QtGui.QPalette.BrightText, QtGui.QColor(227,227,227))
-            dark_theme.setColor(QtGui.QPalette.Highlight, QtGui.QColor(18,131,220))
-            dark_theme.setColor(QtGui.QPalette.HighlightedText, QtCore.Qt.black)
-            dark_theme.setColor(QtGui.QPalette.Active, QtGui.QPalette.Button, QtGui.QColor(53, 53, 53))
-            dark_theme.setColor(QtGui.QPalette.Inactive, QtGui.QPalette.Button, QtGui.QColor(53, 53, 53))
-            dark_theme.setColor(QtGui.QPalette.Disabled, QtGui.QPalette.ButtonText, QtGui.QColor(85,83,83))
-            dark_theme.setColor(QtGui.QPalette.Disabled, QtGui.QPalette.WindowText, QtGui.QColor(85,83,83))
-            dark_theme.setColor(QtGui.QPalette.Disabled, QtGui.QPalette.Text, QtGui.QColor(85,83,83))
-            dark_theme.setColor(QtGui.QPalette.Disabled, QtGui.QPalette.Light, QtGui.QColor(53, 53, 53))
+            dark_theme.setColor(QtGui.QPalette.ColorRole.Window, QtGui.QColor(55,53,53))
+            dark_theme.setColor(QtGui.QPalette.ColorRole.WindowText, QtGui.QColor(227,227,227))
+            dark_theme.setColor(QtGui.QPalette.ColorRole.Base, QtGui.QColor(30,30,30))
+            dark_theme.setColor(QtGui.QPalette.ColorRole.AlternateBase, QtGui.QColor(55,55,55))
+            dark_theme.setColor(QtGui.QPalette.ColorRole.ToolTipBase, QtGui.QColor(50,50,50))
+            dark_theme.setColor(QtGui.QPalette.ColorRole.ToolTipText, QtGui.QColor(227,227,227))
+            dark_theme.setColor(QtGui.QPalette.ColorRole.Text, QtGui.QColor(227,227,227))
+            dark_theme.setColor(QtGui.QPalette.ColorRole.Link, QtGui.QColor(227,227,227))
+            dark_theme.setColor(QtGui.QPalette.ColorRole.Button, QtGui.QColor(50,50,50))
+            dark_theme.setColor(QtGui.QPalette.ColorRole.ButtonText, QtGui.QColor(227,227,227))
+            dark_theme.setColor(QtGui.QPalette.ColorRole.BrightText, QtGui.QColor(227,227,227))
+            dark_theme.setColor(QtGui.QPalette.ColorRole.Highlight, QtGui.QColor(18,131,220))
+            dark_theme.setColor(QtGui.QPalette.ColorRole.HighlightedText, QtCore.Qt.GlobalColor.black)
+            dark_theme.setColor(QtGui.QPalette.ColorGroup.Active, QtGui.QPalette.ColorRole.Button, QtGui.QColor(53, 53, 53))
+            dark_theme.setColor(QtGui.QPalette.ColorGroup.Inactive, QtGui.QPalette.ColorRole.Button, QtGui.QColor(53, 53, 53))
+            dark_theme.setColor(QtGui.QPalette.ColorGroup.Disabled, QtGui.QPalette.ColorRole.ButtonText, QtGui.QColor(85,83,83))
+            dark_theme.setColor(QtGui.QPalette.ColorGroup.Disabled, QtGui.QPalette.ColorRole.WindowText, QtGui.QColor(85,83,83))
+            dark_theme.setColor(QtGui.QPalette.ColorGroup.Disabled, QtGui.QPalette.ColorRole.Text, QtGui.QColor(85,83,83))
+            dark_theme.setColor(QtGui.QPalette.ColorGroup.Disabled, QtGui.QPalette.ColorRole.Light, QtGui.QColor(53, 53, 53))
             QtGui.QGuiApplication.setPalette(dark_theme)
             self.mainUi.setStyleSheet("""
                                         QFrame#banner {background-color: qlineargradient(x1:0 y1:0, x2:0 y2:1, stop:0 #5e5b5b, stop:1 #373535); border-radius: 0px;}
@@ -228,25 +225,25 @@ class SystemTrayIcon(QtWidgets.QSystemTrayIcon):
             self.themeAction.setChecked(True)
         else:
             light_theme = QtGui.QPalette()
-            light_theme.setColor(QtGui.QPalette.Window, QtGui.QColor(240,240,240))
-            light_theme.setColor(QtGui.QPalette.WindowText, QtGui.QColor(68,68,68))
-            light_theme.setColor(QtGui.QPalette.Base, QtGui.QColor(255,255,255))
-            light_theme.setColor(QtGui.QPalette.AlternateBase, QtGui.QColor(255,255,255))
-            light_theme.setColor(QtGui.QPalette.ToolTipBase, QtGui.QColor(240,240,240))
-            light_theme.setColor(QtGui.QPalette.ToolTipText, QtGui.QColor(68,68,68))
-            light_theme.setColor(QtGui.QPalette.Text, QtGui.QColor(68,68,68))
-            light_theme.setColor(QtGui.QPalette.Link, QtGui.QColor(68,68,68))
-            light_theme.setColor(QtGui.QPalette.Button, QtGui.QColor(240,240,240))
-            light_theme.setColor(QtGui.QPalette.ButtonText, QtGui.QColor(68,68,68))
-            light_theme.setColor(QtGui.QPalette.BrightText, QtGui.QColor(68,68,68))
-            light_theme.setColor(QtGui.QPalette.Highlight, QtGui.QColor(18,131,220))
-            light_theme.setColor(QtGui.QPalette.HighlightedText, QtCore.Qt.white)
-            light_theme.setColor(QtGui.QPalette.Active, QtGui.QPalette.Button, QtGui.QColor(240,240,240))
-            light_theme.setColor(QtGui.QPalette.Inactive, QtGui.QPalette.Button, QtGui.QColor(240,240,240))
-            light_theme.setColor(QtGui.QPalette.Disabled, QtGui.QPalette.ButtonText, QtGui.QColor(118,118,118))
-            light_theme.setColor(QtGui.QPalette.Disabled, QtGui.QPalette.WindowText, QtGui.QColor(118,118,118))
-            light_theme.setColor(QtGui.QPalette.Disabled, QtGui.QPalette.Text, QtGui.QColor(118,118,118))
-            light_theme.setColor(QtGui.QPalette.Disabled, QtGui.QPalette.Light, QtGui.QColor(243,243,243))
+            light_theme.setColor(QtGui.QPalette.ColorRole.Window, QtGui.QColor(240,240,240))
+            light_theme.setColor(QtGui.QPalette.ColorRole.WindowText, QtGui.QColor(68,68,68))
+            light_theme.setColor(QtGui.QPalette.ColorRole.Base, QtGui.QColor(255,255,255))
+            light_theme.setColor(QtGui.QPalette.ColorRole.AlternateBase, QtGui.QColor(255,255,255))
+            light_theme.setColor(QtGui.QPalette.ColorRole.ToolTipBase, QtGui.QColor(240,240,240))
+            light_theme.setColor(QtGui.QPalette.ColorRole.ToolTipText, QtGui.QColor(68,68,68))
+            light_theme.setColor(QtGui.QPalette.ColorRole.Text, QtGui.QColor(68,68,68))
+            light_theme.setColor(QtGui.QPalette.ColorRole.Link, QtGui.QColor(68,68,68))
+            light_theme.setColor(QtGui.QPalette.ColorRole.Button, QtGui.QColor(240,240,240))
+            light_theme.setColor(QtGui.QPalette.ColorRole.ButtonText, QtGui.QColor(68,68,68))
+            light_theme.setColor(QtGui.QPalette.ColorRole.BrightText, QtGui.QColor(68,68,68))
+            light_theme.setColor(QtGui.QPalette.ColorRole.Highlight, QtGui.QColor(18,131,220))
+            light_theme.setColor(QtGui.QPalette.ColorRole.HighlightedText, QtCore.Qt.GlobalColor.white)
+            light_theme.setColor(QtGui.QPalette.ColorGroup.Active, QtGui.QPalette.ColorRole.Button, QtGui.QColor(240,240,240))
+            light_theme.setColor(QtGui.QPalette.ColorGroup.Inactive, QtGui.QPalette.ColorRole.Button, QtGui.QColor(240,240,240))
+            light_theme.setColor(QtGui.QPalette.ColorGroup.Disabled, QtGui.QPalette.ColorRole.ButtonText, QtGui.QColor(118,118,118))
+            light_theme.setColor(QtGui.QPalette.ColorGroup.Disabled, QtGui.QPalette.ColorRole.WindowText, QtGui.QColor(118,118,118))
+            light_theme.setColor(QtGui.QPalette.ColorGroup.Disabled, QtGui.QPalette.ColorRole.Text, QtGui.QColor(118,118,118))
+            light_theme.setColor(QtGui.QPalette.ColorGroup.Disabled, QtGui.QPalette.ColorRole.Light, QtGui.QColor(243,243,243))
             QtGui.QGuiApplication.setPalette(light_theme)
             self.mainUi.setStyleSheet("""
                                         QFrame#banner {background-color: qlineargradient(x1:0 y1:0, x2:0 y2:1, stop:0 #c9c9c9, stop:1 #F0F0F0); border-radius: 0px;}
@@ -312,7 +309,7 @@ class SystemTrayIcon(QtWidgets.QSystemTrayIcon):
 
 class mainUi(QtWidgets.QMainWindow):  #QDialog will only have close button and stay always on top
     def __init__(self, parent=None):
-        QtWidgets.QWidget.__init__(self, None)  #not on top & it's own process
+        super().__init__(None)  #not on top & it's own process
         #QtWidgets.QWidget.__init__(self, parent) #always on top same parent process
         #self.parent = parent
         #self.sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Preferred)
@@ -322,7 +319,7 @@ class mainUi(QtWidgets.QMainWindow):  #QDialog will only have close button and s
         self.ui.setupUi(self)
         #disable resizing
         self.setFixedSize(self.width(), self.height())
-        self.setWindowFlags(QtCore.Qt.Window | QtCore.Qt.MSWindowsFixedSizeDialogHint | QtCore.Qt.WindowMinimizeButtonHint | QtCore.Qt.WindowCloseButtonHint)
+        self.setWindowFlags(QtCore.Qt.WindowType.Window | QtCore.Qt.WindowType.MSWindowsFixedSizeDialogHint | QtCore.Qt.WindowType.WindowMinimizeButtonHint | QtCore.Qt.WindowType.WindowCloseButtonHint)
         #self.setWindowFlags(QtCore.Qt.Tool) #no taskbar button
         self.default_palette = QtGui.QGuiApplication.palette()
         #hotkey
@@ -331,14 +328,14 @@ class mainUi(QtWidgets.QMainWindow):  #QDialog will only have close button and s
         #change text
         self.setWindowTitle(title+' '+ver)
         self.ui.titleLbl.setText(titlef)
-        self.ui.titleLbl.setAlignment(QtCore.Qt.AlignLeft | QtCore.Qt.AlignVCenter)
+        self.ui.titleLbl.setAlignment(QtCore.Qt.AlignmentFlag.AlignLeft | QtCore.Qt.AlignmentFlag.AlignVCenter)
         self.ui.verLbl.setText('نسخه '+ver)
-        self.ui.verLbl.setAlignment(QtCore.Qt.AlignLeft | QtCore.Qt.AlignVCenter)
+        self.ui.verLbl.setAlignment(QtCore.Qt.AlignmentFlag.AlignLeft | QtCore.Qt.AlignmentFlag.AlignVCenter)
         # self.ui.copyLbl.setOpenExternalLinks(True)
         # self.ui.copyLbl.setTextInteractionFlags(QtCore.Qt.LinksAccessibleByMouse)
         self.ui.copyLbl.setText('© LeoMoon Studios')
         #set fonts
-        self.ui.titleLbl.setFont(QtGui.QFont('Vazir', 15, QtGui.QFont.Black))
+        self.ui.titleLbl.setFont(QtGui.QFont('Vazir', 15, QtGui.QFont.Weight.Black))
         self.ui.verLbl.setFont(QtGui.QFont('Vazir FD', 10))
         self.ui.copyLbl.setFont(QtGui.QFont('Vazir FD', 10))
         self.ui.statusLbl.setFont(QtGui.QFont('Vazir FD', 10))
@@ -360,7 +357,7 @@ class mainUi(QtWidgets.QMainWindow):  #QDialog will only have close button and s
         self.ui.miladiDCbox.currentIndexChanged.connect(self.miladiDChange)
         #platform changes
         if sys.platform.startswith('darwin'): #macos
-            self.ui.titleLbl.setFont(QtGui.QFont('Vazir', 20, QtGui.QFont.Black))
+            self.ui.titleLbl.setFont(QtGui.QFont('Vazir', 20, QtGui.QFont.Weight.Black))
             self.ui.verLbl.setFont(QtGui.QFont('Vazir FD', 13))
             self.ui.copyLbl.setFont(QtGui.QFont('Vazir FD', 13))
             #jalali
@@ -491,7 +488,7 @@ def main():
     w = QtWidgets.QWidget()
     trayIcon = SystemTrayIcon(QtGui.QIcon(":/res/tray/00.svg"), w)
     trayIcon.show()
-    sys.exit(app.exec_())
+    sys.exit(app.exec())
 
 if __name__ == '__main__':
     main()

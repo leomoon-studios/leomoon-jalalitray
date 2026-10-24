@@ -18,4 +18,6 @@ The legacy `src/ext/jalali.py` source credits Mohammad Javad Naderi and jdf.scr.
 
 ## Qt for Python and Qt 6
 
-JalaliTray does not yet declare a PySide6 distribution dependency. Step 4 selects PySide6 and its Qt version, and Step 6 records the selected package version, project license option, and required notices before any release.
+JalaliTray uses PySide6 6.12.0 and Qt 6.12.0. PySide6 package metadata identifies the available license expression as `LGPL-3.0-only OR GPL-2.0-only OR GPL-3.0-only`.
+
+The repository has not selected its project license or the corresponding PySide6 distribution option yet. Step 6 must make that selection and include the complete required license texts before any release.
