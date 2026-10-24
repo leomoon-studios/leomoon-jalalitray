@@ -1,5 +1,5 @@
 [build-system]
-requires = ["setuptools>=80,<81"]
+requires = ["setuptools>=80,<81", "setuptools-scm[simple]>=10.3.4,<11"]
 build-backend = "setuptools.build_meta"
 
 [project]
@@ -13,7 +13,24 @@ classifiers = [
     "Programming Language :: Python :: 3",
     "Programming Language :: Python :: 3.12",
 ]
-dependencies = ["PySide6>=6.12,<7"]
+dependencies = [
+    "PySide6>=6.12,<7",
+    "darkdetect>=0.8,<0.9",
+    "persiantools>=6.2,<7",
+]
+
+[project.optional-dependencies]
+build = [
+    "PyInstaller>=6.22.3,<7",
+    "setuptools-scm>=10.3.4,<11",
+    "uv>=0.13.5,<1",
+]
+test = [
+    "pip-audit>=2.10,<3",
+    "pytest>=9,<10",
+    "pytest-qt>=4.5,<5",
+    "ruff>=0.17,<1",
+]
 
 [project.gui-scripts]
 leomoon-jalalitray = "leomoon_jalalitray.app:main"
@@ -28,5 +45,17 @@ include = ["leomoon_jalalitray*"]
 [tool.setuptools.package-data]
 leomoon_jalalitray = ["assets/fonts/*.ttf", "assets/icons/*", "assets/tray/*.svg", "ui/*.qrc", "ui/*.ui"]
 
+[tool.setuptools_scm]
+version_file = "src/leomoon_jalalitray/_version.py"
+fallback_version = "0.0.0+unknown"
+
 [tool.pytest.ini_options]
 testpaths = ["tests"]
+
+[tool.ruff]
+target-version = "py312"
+line-length = 100
+extend-exclude = ["src/leomoon_jalalitray/_generated"]
+
+[tool.ruff.lint]
+select = ["F"]

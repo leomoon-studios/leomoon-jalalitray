@@ -8,13 +8,11 @@ Vazir is distributed under the SIL Open Font License 1.1. The complete license t
 
 ## DarkDetect
 
-The legacy source tree currently vendors DarkDetect 0.7.1, copyright Alberto Sottile and contributors, from <https://github.com/albertosottile/darkdetect>. DarkDetect is licensed under the BSD 3-Clause License.
+LeoMoon JalaliTray uses DarkDetect 0.8.0, copyright Alberto Sottile and contributors, from <https://github.com/albertosottile/darkdetect>. DarkDetect is licensed under the BSD 3-Clause License.
 
-Step 6 replaces the vendored copy with the maintained PyPI dependency and records the selected version and complete license text before release.
+## PersianTools
 
-## Jalali Conversion Code
-
-The legacy `src/ext/jalali.py` source credits Mohammad Javad Naderi and jdf.scr.ir. Its source header contains non-SPDX redistribution notes that require a provenance and license review before the code is redistributed in a release.
+LeoMoon JalaliTray uses PersianTools 6.2.0, copyright Majid Hajiloo and contributors, from <https://github.com/majiidd/persiantools>. PersianTools is licensed under the MIT License.
 
 ## Qt for Python and Qt 6
 

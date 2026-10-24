@@ -58,5 +58,5 @@ def test_seconds_until_midnight() -> None:
 
 
 def test_invalid_jalali_date_is_rejected() -> None:
-    with pytest.raises(Exception, match="Incorrect Date"):
+    with pytest.raises(ValueError):
         jalali_to_gregorian(1403, 13, 1)

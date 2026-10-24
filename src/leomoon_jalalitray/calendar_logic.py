@@ -5,7 +5,7 @@ from __future__ import annotations
 import calendar
 from datetime import date, datetime
 
-from ._vendor import jalali
+from persiantools.jdatetime import JalaliDate
 
 
 GREGORIAN_YEAR_START = 1800
@@ -31,11 +31,12 @@ def jalali_year_choices(today: date | None = None) -> list[str]:
 
 
 def gregorian_to_jalali(value: date) -> tuple[int, int, int]:
-    return tuple(int(part) for part in jalali.Gregorian(value).persian_tuple())
+    converted = JalaliDate(value)
+    return converted.year, converted.month, converted.day
 
 
 def jalali_to_gregorian(year: int, month: int, day: int) -> date:
-    return date(*jalali.Persian(year, month, day).gregorian_tuple())
+    return JalaliDate(year, month, day).to_gregorian()
 
 
 def date_to_unpadded_iso(value: date | tuple[int, int, int]) -> str:

@@ -30,10 +30,9 @@ from .calendar_logic import (
     jalali_year_choices,
     seconds_until_midnight,
     tray_icon_resource,
-    windows_startup_command,
 )
 from ._generated.main_window import Ui_main
-from ._vendor.darkdetect import isDark #darkdetect 0.7.1 [ https://github.com/albertosottile/darkdetect ] 20220718
+from darkdetect import isDark
 if sys.platform.startswith('win'):
     import winreg #startup reg
 
@@ -98,7 +97,7 @@ class SystemTrayIcon(QtWidgets.QSystemTrayIcon):
                 #try query startup key. if exists then startup is true
                 winreg.QueryValueEx(winreg.OpenKey(winreg.HKEY_CURRENT_USER, r'SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run', 0, winreg.KEY_READ), 'LeoMoon JalaliTray')
                 self.startupMenu.setChecked(True)
-            except Exception as e:
+            except Exception:
                 pass
         ###############################################################################
         ####### Theme startup #########################################################
@@ -118,7 +117,6 @@ class SystemTrayIcon(QtWidgets.QSystemTrayIcon):
         exitAction.triggered.connect(self.exit)
         self.setContextMenu(menu)
         self.activated.connect(self.onTrayIcon)
-        diag = QtWidgets.QColorDialog()
         self.start_timer()
 
     def _jalalifCopy(self):

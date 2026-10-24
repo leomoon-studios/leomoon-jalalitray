@@ -26,7 +26,6 @@ DisableProgramGroupPage=yes
 LicenseFile=EULA.txt
 OutputDir=..\dist\build
 OutputBaseFilename={#AppOutput}
-SetupIconFile=setup.ico
 Compression=lzma/ultra
 InternalCompressLevel=ultra
 SolidCompression=yes
