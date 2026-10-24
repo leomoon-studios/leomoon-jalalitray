@@ -28,13 +28,11 @@ from .calendar_logic import (
     jalali_year_choices,
     seconds_until_midnight,
     tray_icon_resource,
-    windows_startup_command,
 )
 from ._generated.main_window import Ui_main
+from .startup import is_enabled as startup_enabled, set_enabled as set_startup_enabled
 from .version import __version__
 from darkdetect import isDark
-if sys.platform.startswith('win'):
-    import winreg #startup reg
 
 title = 'LeoMoon JalaliTray'
 titlef = 'دگردیس سالنامه پارسی'
@@ -89,16 +87,10 @@ class SystemTrayIcon(QtWidgets.QSystemTrayIcon):
         converterWin = menu.addAction("Open Date Converter")
         converterWin.triggered.connect(self.converter)
         menu.addSeparator()
-        if sys.platform.startswith('win'):
-            self.startupMenu = menu.addAction("Start with Windows")
-            self.startupMenu.triggered.connect(self.startup)
-            self.startupMenu.setCheckable(True)
-            try:
-                #try query startup key. if exists then startup is true
-                winreg.QueryValueEx(winreg.OpenKey(winreg.HKEY_CURRENT_USER, r'Software\Microsoft\Windows\CurrentVersion\Run', 0, winreg.KEY_READ), 'LeoMoon JalaliTray')
-                self.startupMenu.setChecked(True)
-            except Exception:
-                pass
+        self.startupMenu = menu.addAction("Start at login")
+        self.startupMenu.triggered.connect(self.startup)
+        self.startupMenu.setCheckable(True)
+        self.startupMenu.setChecked(startup_enabled())
         ###############################################################################
         ####### Theme startup #########################################################
         ###############################################################################
@@ -172,19 +164,12 @@ class SystemTrayIcon(QtWidgets.QSystemTrayIcon):
                     self.mainUi.activateWindow()
 
     def startup(self):
-        if sys.platform.startswith('win'):
-            valexists = False
-            try:
-                winreg.QueryValueEx(winreg.OpenKey(winreg.HKEY_CURRENT_USER, r'Software\Microsoft\Windows\CurrentVersion\Run', 0, winreg.KEY_READ), 'LeoMoon JalaliTray')
-                valexists = True
-            except:
-                pass
-            if valexists:
-                winreg.DeleteValue(winreg.OpenKey(winreg.HKEY_CURRENT_USER, r'Software\Microsoft\Windows\CurrentVersion\Run', 0, winreg.KEY_ALL_ACCESS), 'LeoMoon JalaliTray')
-                self.startupMenu.setChecked(False)
-            else:
-                winreg.SetValueEx(winreg.OpenKey(winreg.HKEY_CURRENT_USER, r'Software\Microsoft\Windows\CurrentVersion\Run', 0, winreg.KEY_ALL_ACCESS), 'LeoMoon JalaliTray', 0, winreg.REG_SZ, windows_startup_command(sys.executable))
-                self.startupMenu.setChecked(True)
+        try:
+            set_startup_enabled(not startup_enabled())
+            self.startupMenu.setChecked(startup_enabled())
+        except OSError as error:
+            self.startupMenu.setChecked(startup_enabled())
+            QtWidgets.QMessageBox.warning(self.mainUi, title, f"Could not update start at login: {error}")
 
     def converter(self):
         self.mainUi.show()
