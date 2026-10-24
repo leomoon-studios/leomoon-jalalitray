@@ -28,6 +28,7 @@ from .calendar_logic import (
     jalali_year_choices,
     seconds_until_midnight,
     tray_icon_resource,
+    windows_startup_command,
 )
 from ._generated.main_window import Ui_main
 from .version import __version__
@@ -94,7 +95,7 @@ class SystemTrayIcon(QtWidgets.QSystemTrayIcon):
             self.startupMenu.setCheckable(True)
             try:
                 #try query startup key. if exists then startup is true
-                winreg.QueryValueEx(winreg.OpenKey(winreg.HKEY_CURRENT_USER, r'SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run', 0, winreg.KEY_READ), 'LeoMoon JalaliTray')
+                winreg.QueryValueEx(winreg.OpenKey(winreg.HKEY_CURRENT_USER, r'Software\Microsoft\Windows\CurrentVersion\Run', 0, winreg.KEY_READ), 'LeoMoon JalaliTray')
                 self.startupMenu.setChecked(True)
             except Exception:
                 pass
@@ -174,15 +175,15 @@ class SystemTrayIcon(QtWidgets.QSystemTrayIcon):
         if sys.platform.startswith('win'):
             valexists = False
             try:
-                winreg.QueryValueEx(winreg.OpenKey(winreg.HKEY_CURRENT_USER, r'SOFTWARE\\Microsoft\Windows\\CurrentVersion\\Run', 0, winreg.KEY_READ), 'LeoMoon JalaliTray')
+                winreg.QueryValueEx(winreg.OpenKey(winreg.HKEY_CURRENT_USER, r'Software\Microsoft\Windows\CurrentVersion\Run', 0, winreg.KEY_READ), 'LeoMoon JalaliTray')
                 valexists = True
             except:
                 pass
             if valexists:
-                winreg.DeleteValue(winreg.OpenKey(winreg.HKEY_CURRENT_USER, r'SOFTWARE\\Microsoft\Windows\\CurrentVersion\\Run', 0, winreg.KEY_ALL_ACCESS), 'LeoMoon JalaliTray')
+                winreg.DeleteValue(winreg.OpenKey(winreg.HKEY_CURRENT_USER, r'Software\Microsoft\Windows\CurrentVersion\Run', 0, winreg.KEY_ALL_ACCESS), 'LeoMoon JalaliTray')
                 self.startupMenu.setChecked(False)
             else:
-                winreg.SetValueEx(winreg.OpenKey(winreg.HKEY_CURRENT_USER, r'Software\\Microsoft\Windows\\CurrentVersion\\Run', 0, winreg.KEY_ALL_ACCESS), 'LeoMoon JalaliTray', 1, winreg.REG_SZ, '"'+sys.executable+'"')
+                winreg.SetValueEx(winreg.OpenKey(winreg.HKEY_CURRENT_USER, r'Software\Microsoft\Windows\CurrentVersion\Run', 0, winreg.KEY_ALL_ACCESS), 'LeoMoon JalaliTray', 0, winreg.REG_SZ, windows_startup_command(sys.executable))
                 self.startupMenu.setChecked(True)
 
     def converter(self):
