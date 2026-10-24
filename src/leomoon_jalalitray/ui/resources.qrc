@@ -1,0 +1,41 @@
+<RCC>
+  <qresource prefix="res">
+    <file alias="fonts/Vazir.ttf">../assets/fonts/Vazir.ttf</file>
+    <file alias="fonts/Vazir-Black.ttf">../assets/fonts/Vazir-Black.ttf</file>
+    <file alias="fonts/Vazir-Bold.ttf">../assets/fonts/Vazir-Bold.ttf</file>
+    <file alias="fonts/Vazir-FD.ttf">../assets/fonts/Vazir-FD.ttf</file>
+    <file alias="tray/00.svg">../assets/tray/00.svg</file>
+    <file alias="tray/01.svg">../assets/tray/01.svg</file>
+    <file alias="tray/02.svg">../assets/tray/02.svg</file>
+    <file alias="tray/03.svg">../assets/tray/03.svg</file>
+    <file alias="tray/04.svg">../assets/tray/04.svg</file>
+    <file alias="tray/05.svg">../assets/tray/05.svg</file>
+    <file alias="tray/06.svg">../assets/tray/06.svg</file>
+    <file alias="tray/07.svg">../assets/tray/07.svg</file>
+    <file alias="tray/08.svg">../assets/tray/08.svg</file>
+    <file alias="tray/09.svg">../assets/tray/09.svg</file>
+    <file alias="tray/10.svg">../assets/tray/10.svg</file>
+    <file alias="tray/11.svg">../assets/tray/11.svg</file>
+    <file alias="tray/12.svg">../assets/tray/12.svg</file>
+    <file alias="tray/13.svg">../assets/tray/13.svg</file>
+    <file alias="tray/14.svg">../assets/tray/14.svg</file>
+    <file alias="tray/15.svg">../assets/tray/15.svg</file>
+    <file alias="tray/16.svg">../assets/tray/16.svg</file>
+    <file alias="tray/17.svg">../assets/tray/17.svg</file>
+    <file alias="tray/18.svg">../assets/tray/18.svg</file>
+    <file alias="tray/19.svg">../assets/tray/19.svg</file>
+    <file alias="tray/20.svg">../assets/tray/20.svg</file>
+    <file alias="tray/21.svg">../assets/tray/21.svg</file>
+    <file alias="tray/22.svg">../assets/tray/22.svg</file>
+    <file alias="tray/23.svg">../assets/tray/23.svg</file>
+    <file alias="tray/24.svg">../assets/tray/24.svg</file>
+    <file alias="tray/25.svg">../assets/tray/25.svg</file>
+    <file alias="tray/26.svg">../assets/tray/26.svg</file>
+    <file alias="tray/27.svg">../assets/tray/27.svg</file>
+    <file alias="tray/28.svg">../assets/tray/28.svg</file>
+    <file alias="tray/29.svg">../assets/tray/29.svg</file>
+    <file alias="tray/30.svg">../assets/tray/30.svg</file>
+    <file alias="tray/31.svg">../assets/tray/31.svg</file>
+    <file alias="icons/main.svg">../assets/icons/main.svg</file>
+  </qresource>
+</RCC>

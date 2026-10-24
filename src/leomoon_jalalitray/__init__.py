@@ -1,0 +1,1 @@
+"""LeoMoon JalaliTray application package."""

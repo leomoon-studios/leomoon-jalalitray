@@ -15,7 +15,7 @@ from datetime import date, datetime
 import calendar
 import webbrowser #web links
 from PySide6 import QtCore, QtGui, QtWidgets
-from calendar_logic import (
+from .calendar_logic import (
     GREGORIAN_MONTHS,
     JALALI_MONTHS,
     JALALI_WEEKDAYS,
@@ -32,8 +32,8 @@ from calendar_logic import (
     tray_icon_resource,
     windows_startup_command,
 )
-from gui.guiMain import Ui_main
-from ext.darkdetect import isDark #darkdetect 0.7.1 [ https://github.com/albertosottile/darkdetect ] 20220718
+from ._generated.main_window import Ui_main
+from ._vendor.darkdetect import isDark #darkdetect 0.7.1 [ https://github.com/albertosottile/darkdetect ] 20220718
 if sys.platform.startswith('win'):
     import winreg #startup reg
 

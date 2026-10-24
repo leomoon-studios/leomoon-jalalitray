@@ -6,7 +6,7 @@ from pathlib import Path
 
 import pytest
 
-from calendar_logic import FUTURE_YEAR_WINDOW, age_years, date_to_padded_iso, date_to_unpadded_iso, gregorian_to_jalali, gregorian_year_choices, is_gregorian_leap_year, is_jalali_leap_year, jalali_to_gregorian, jalali_weekday, jalali_year_choices, seconds_until_midnight, tray_icon_resource, windows_startup_command
+from leomoon_jalalitray.calendar_logic import FUTURE_YEAR_WINDOW, age_years, date_to_padded_iso, date_to_unpadded_iso, gregorian_to_jalali, gregorian_year_choices, is_gregorian_leap_year, is_jalali_leap_year, jalali_to_gregorian, jalali_weekday, jalali_year_choices, seconds_until_midnight, tray_icon_resource, windows_startup_command
 
 
 FIXTURE_PATH = Path(__file__).parent / "fixtures" / "calendar_cases.json"

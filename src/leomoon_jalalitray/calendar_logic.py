@@ -5,7 +5,7 @@ from __future__ import annotations
 import calendar
 from datetime import date, datetime
 
-from ext import jalali
+from ._vendor import jalali
 
 
 GREGORIAN_YEAR_START = 1800

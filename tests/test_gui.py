@@ -6,7 +6,7 @@ from PySide6 import QtCore, QtGui, QtWidgets
 
 
 def test_converter_window_constructs_with_rolling_year_choices(qapp: QtWidgets.QApplication) -> None:
-    import main
+    from leomoon_jalalitray import app as main
 
     window = main.mainUi()
 
@@ -17,7 +17,7 @@ def test_converter_window_constructs_with_rolling_year_choices(qapp: QtWidgets.Q
 
 
 def test_tray_icon_clipboard_and_theme_actions(qapp: QtWidgets.QApplication) -> None:
-    import main
+    from leomoon_jalalitray import app as main
 
     parent = QtWidgets.QWidget()
     tray = main.SystemTrayIcon(QtGui.QIcon(":/res/tray/01.svg"), parent)
@@ -32,7 +32,7 @@ def test_tray_icon_clipboard_and_theme_actions(qapp: QtWidgets.QApplication) -> 
 
 
 def test_all_embedded_fonts_and_tray_icons_exist(qapp: QtWidgets.QApplication) -> None:
-    import main  # noqa: F401
+    from leomoon_jalalitray import app  # noqa: F401
 
     for font_name in ("Vazir.ttf", "Vazir-Black.ttf", "Vazir-Bold.ttf", "Vazir-FD.ttf"):
         resource = f":/res/fonts/{font_name}"
