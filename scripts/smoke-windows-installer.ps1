@@ -25,13 +25,15 @@ function Invoke-CheckedProcess([string]$FilePath, [string[]]$Arguments, [int]$Ti
 
 $testRoot = Join-Path $env:RUNNER_TEMP "leomoon-jalalitray-windows-installer-smoke"
 $installDirectory = Join-Path $testRoot "application"
+$installLog = Join-Path $env:RUNNER_TEMP "leomoon-jalalitray-install.log"
+$uninstallLog = Join-Path $env:RUNNER_TEMP "leomoon-jalalitray-uninstall.log"
 $startupKey = "HKCU:\Software\Microsoft\Windows\CurrentVersion\Run"
 $startupValue = "LeoMoon JalaliTray"
 try {
     Remove-Item -LiteralPath $testRoot -Recurse -Force -ErrorAction SilentlyContinue
     Remove-ItemProperty -Path $startupKey -Name $startupValue -ErrorAction SilentlyContinue
     New-Item -ItemType Directory -Path $testRoot | Out-Null
-    $installArguments = @("/SP-", "/VERYSILENT", "/SUPPRESSMSGBOXES", "/NORESTART", "/DIR=`"$installDirectory`"", "/TASKS=`"startup`"")
+    $installArguments = @("/SP-", "/VERYSILENT", "/SUPPRESSMSGBOXES", "/NORESTART", "/LOG=`"$installLog`"", "/DIR=`"$installDirectory`"", "/TASKS=`"startup`"")
     Invoke-CheckedProcess $installer $installArguments 600
     $application = Join-Path $installDirectory "LeoMoon JalaliTray.exe"
     if (-not (Test-Path -LiteralPath $application -PathType Leaf)) { throw "Installed application is missing" }
@@ -46,8 +48,12 @@ try {
     Invoke-CheckedProcess $installer $installArguments 600
     $uninstaller = Join-Path $installDirectory "unins000.exe"
     if (-not (Test-Path -LiteralPath $uninstaller -PathType Leaf)) { throw "Windows uninstaller is missing" }
-    Invoke-CheckedProcess $uninstaller @("/VERYSILENT", "/SUPPRESSMSGBOXES", "/NORESTART") 600
-    if (Test-Path -LiteralPath $installDirectory) { throw "Application directory remains after uninstall" }
+    Invoke-CheckedProcess $uninstaller @("/VERYSILENT", "/SUPPRESSMSGBOXES", "/NORESTART", "/LOG=`"$uninstallLog`"") 600
+    $deadline = [DateTime]::UtcNow.AddSeconds(60)
+    while (Test-Path -LiteralPath $installDirectory) {
+        if ([DateTime]::UtcNow -ge $deadline) { throw "Application directory remains after uninstall" }
+        Start-Sleep -Milliseconds 200
+    }
     if (Get-ItemProperty -Path $startupKey -Name $startupValue -ErrorAction SilentlyContinue) { throw "Startup task remains after uninstall" }
 } finally {
     Remove-Item -LiteralPath $testRoot -Recurse -Force -ErrorAction SilentlyContinue
