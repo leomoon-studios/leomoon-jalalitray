@@ -2,25 +2,17 @@
 
 ## 2.0.0 (2026-10-24)
 
-### Added
-
 - Native release packages for Windows x64 and ARM64, Linux x86_64 and ARM64 AppImages, and macOS ARM64 DMG.
 - GitHub Actions builds, package smoke tests, checksums, and tag-driven GitHub releases with linked commit and contributor credits.
 - Cross-platform **Start at login** control in the tray menu, using Windows Run entries, macOS LaunchAgents, and Linux XDG autostart entries.
 - Regression tests for Jalali and Gregorian calendar conversion, plus UI and startup behavior tests.
 - Updated bundled Vazir fonts, including the bold face.
 - Documented the tag-driven release process, package naming, signing-secret handling, contribution workflow, and third-party package notices.
-
-### Changed
-
 - Migrated the application from PyQt5 to PySide6 and Qt 6.
 - Moved the application to a standard `src/` package layout with generated Qt sources and modern project metadata.
 - Locked maintained Python dependencies in `uv.lock` and updated DarkDetect, PersianTools, PyInstaller, and development tooling.
 - Replaced legacy build scripts and bundled compatibility DLLs with deterministic PyInstaller packaging and native platform installers.
 - Updated supported systems to current Windows, Linux, and macOS releases.
-
-### Fixed
-
 - Improved Windows installer smoke tests to wait for asynchronous uninstall cleanup.
 
 ## 1.0.9 (2024-09-03)
